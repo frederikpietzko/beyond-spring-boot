@@ -1,6 +1,5 @@
-
 plugins {
-
+  id("io.quarkus") apply false
 }
 
 group = "com.github.frederikpietzko"
@@ -11,7 +10,8 @@ allprojects {
   version = "1.0.0"
 
   repositories {
-
+    mavenLocal()
+    mavenCentral()
   }
 }
 
