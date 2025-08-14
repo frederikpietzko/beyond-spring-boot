@@ -15,4 +15,6 @@ rootProject.name = "beyond-spring-boot"
 include(
   "quarkus",
   "micronaut",
+  "helidon-mp",
+  "helidon-se"
 )

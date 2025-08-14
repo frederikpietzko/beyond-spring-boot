@@ -1,0 +1,13 @@
+javax:
+  sql:
+    DataSource:
+      default:
+        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+        dataSource:
+          url: jdbc:postgresql://localhost:5432/postgres
+          user: pg
+          password: pg
+hibernate:
+  hbm2ddl:
+    auto: create-drop
+

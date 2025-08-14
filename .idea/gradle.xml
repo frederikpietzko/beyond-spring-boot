@@ -9,10 +9,16 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/helidon-mp" />
+            <option value="$PROJECT_DIR$/helidon-se" />
             <option value="$PROJECT_DIR$/micronaut" />
             <option value="$PROJECT_DIR$/quarkus" />
           </set>
         </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/helidon-wizard-test" />
+        <option name="gradleJvm" value="21" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/micro_naut" />

@@ -1,0 +1,62 @@
+package com.github.frederikpietzko;
+
+import com.github.frederikpietzko.dto.CreateVisitDto;
+import com.github.frederikpietzko.dto.VisitDto;
+import com.github.frederikpietzko.model.VisitEntity;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+import java.util.stream.Stream;
+
+@Path("/visits")
+@Transactional
+public class VisitResource {
+  private final VisitRepository visitRepository;
+
+  @Inject
+  public VisitResource(VisitRepository visitRepository) {
+    this.visitRepository = visitRepository;
+  }
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public List<VisitDto> getVisits() {
+    final Stream<VisitEntity> visits = visitRepository
+      .streamAll();
+
+    return visits
+      .map(VisitDto::fromEntity)
+      .toList();
+  }
+
+  @GET
+  @Path("/{id}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public VisitDto getVisit(@NotNull @Min(1) Long id) {
+    final VisitEntity visit = visitRepository
+      .findById(id);
+
+    if (visit == null) {
+      throw new NotFoundException("Visit not found");
+    }
+
+    return VisitDto.fromEntity(visit);
+  }
+
+  @POST
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public VisitDto createVisit(CreateVisitDto visit) {
+    final var newVisit = visit.toVisitEntity();
+    visitRepository.save(newVisit);
+    return VisitDto.fromEntity(newVisit);
+  }
+}
+

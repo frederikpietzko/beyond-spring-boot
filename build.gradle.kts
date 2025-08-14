@@ -3,6 +3,8 @@ plugins {
   id("io.micronaut.application") version "4.5.4" apply false
   id("com.gradleup.shadow") version "8.3.7" apply false
   id("io.micronaut.aot") version "4.5.4" apply false
+  id("org.kordamp.gradle.jandex") version "2.0.0" apply false
+  id("org.hibernate.orm") version "7.1.0.Final" apply false
 }
 
 group = "com.github.frederikpietzko"
