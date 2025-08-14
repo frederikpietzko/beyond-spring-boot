@@ -10,4 +10,6 @@ javax:
 hibernate:
   hbm2ddl:
     auto: create-drop
-
+otel:
+  agent:
+    present: true
