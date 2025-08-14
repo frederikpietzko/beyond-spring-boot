@@ -7,3 +7,11 @@ services:
       - "4317:4317"
       - "4318:4318"
       - "3000:3000"
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: pg
+      POSTGRES_PASSWORD: pg
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"

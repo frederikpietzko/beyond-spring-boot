@@ -1,0 +1,16 @@
+###
+GET http://localhost:8080/visits
+
+###
+POST http://localhost:8080/visits
+Content-Type: application/json
+
+{
+  "description": "My Cat is barfing a lot",
+  "dateTime": "2025-10-01T12:00:00Z",
+  "pet": {
+    "name": "Thor",
+    "age": 5,
+    "type": "CAT"
+  }
+}
