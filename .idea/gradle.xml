@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/helidon-mp" />
             <option value="$PROJECT_DIR$/helidon-se" />
+            <option value="$PROJECT_DIR$/javalin" />
             <option value="$PROJECT_DIR$/micronaut" />
             <option value="$PROJECT_DIR$/quarkus" />
           </set>

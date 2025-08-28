@@ -16,5 +16,6 @@ include(
   "quarkus",
   "micronaut",
   "helidon-mp",
-  "helidon-se"
+  "helidon-se",
+  "javalin",
 )
