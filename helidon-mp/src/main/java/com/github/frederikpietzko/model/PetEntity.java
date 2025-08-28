@@ -3,6 +3,7 @@ package com.github.frederikpietzko.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "pet")
 public class PetEntity extends BaseEntity {
   @NotEmpty
   public String name;

@@ -3,6 +3,7 @@ package com.github.frederikpietzko.model;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import java.time.OffsetDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "visit")
 public class VisitEntity extends BaseEntity {
   @NotEmpty
   public String description;

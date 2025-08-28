@@ -1,9 +1,12 @@
 ###
 GET http://localhost:8080/visits
+Accept: application/json
+Content-Type: application/json
 
 ###
 POST http://localhost:8080/visits
 Content-Type: application/json
+Accept: application/json
 
 {
   "description": "My Cat is barfing a lot",

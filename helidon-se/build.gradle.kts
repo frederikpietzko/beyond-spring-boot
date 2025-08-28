@@ -12,7 +12,7 @@ java {
 dependencies {
   implementation(enforcedPlatform("io.helidon:helidon-dependencies:$helidonVersion"))
   implementation("io.helidon.webserver:helidon-webserver")
-  implementation("io.helidon.http.media:helidon-http-media-jsonp")
+  implementation("io.helidon.http.media:helidon-http-media-jackson")
 
   annotationProcessor("org.projectlombok:lombok:1.18.38")
   compileOnly("org.projectlombok:lombok:1.18.38")
@@ -26,6 +26,12 @@ dependencies {
   implementation("io.helidon.webserver.observe:helidon-webserver-observe-metrics")
   implementation("io.helidon.config:helidon-config-yaml")
   implementation("io.helidon.health:helidon-health-checks")
+
+  implementation("io.helidon.dbclient:helidon-dbclient")
+  implementation("io.helidon.dbclient:helidon-dbclient-jdbc")
+  implementation("io.helidon.dbclient:helidon-dbclient-hikari")
+
+  runtimeOnly("org.postgresql:postgresql")
 
   testImplementation("io.helidon.webserver.testing.junit5:helidon-webserver-testing-junit5")
   testImplementation("org.junit.jupiter:junit-jupiter")

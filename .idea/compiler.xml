@@ -5,7 +5,34 @@
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.orm/hibernate-processor/7.1.0.Final/32dd22f05126d3406b605535ac5a452130e1356f/hibernate-processor-7.1.0.Final.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.38/57f8f5e02e92a30fd21b80cbd426a4172b5f8e29/lombok-1.18.38.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.orm/hibernate-core/7.1.0.Final/478e5ed01a619146d3ee22449c537f34fde0a2f5/hibernate-core-7.1.0.Final.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.models/hibernate-models/1.0.1/3158c5f9309494b905de62c72f6f02d108aea651/hibernate-models-1.0.1.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.smallrye/jandex/3.3.1/cea8c28faa729cbc00a6d397cf28f12ae9a577f0/jandex-3.3.1.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar" />
+          <entry name="$MAVEN_REPOSITORY$/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.validation/jakarta.validation-api/3.1.1/ec8622148afc5564235d17af80ea80288d0e7f92/jakarta.validation-api-3.1.1.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.annotation/jakarta.annotation-api/3.0.0/54f928fadec906a99d558536756d171917b9d936/jakarta.annotation-api-3.0.0.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4-runtime/4.13.2/fc3db6d844df652a3d5db31c87fa12757f13691d/antlr4-runtime-4.13.2.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.17.6/8c70cbc6950b2ae5291a98d5003e06406d633803/byte-buddy-1.17.6.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.persistence/jakarta.persistence-api/3.2.0/bb75a113f3fa191c2c7ee7b206d8e674251b3129/jakarta.persistence-api-3.2.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar" />
+          <entry name="$MAVEN_REPOSITORY$/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.activation/jakarta.activation-api/2.1.3/fa165bd70cda600368eee31555222776a46b881f/jakarta.activation-api-2.1.3.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar" />
+        </processorPath>
+        <module name="beyond-spring-boot.helidon-mp.main" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.38/57f8f5e02e92a30fd21b80cbd426a4172b5f8e29/lombok-1.18.38.jar" />
         </processorPath>
         <module name="beyond-spring-boot.quarkus.main" />
         <module name="beyond-spring-boot.helidon-se.main" />
@@ -17,7 +44,7 @@
         <option name="micronaut.processing.incremental" value="true" />
         <option name="micronaut.processing.module" value="micronaut" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.38/57f8f5e02e92a30fd21b80cbd426a4172b5f8e29/lombok-1.18.38.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut.data/micronaut-data-processor/4.13.3/68f61630002a334e1825ebbbe90eeb2d757422de/micronaut-data-processor-4.13.3.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut.jaxrs/micronaut-jaxrs-processor/4.9.2/45918000c58889373b2bc71b269c03fcd8c591fe/micronaut-jaxrs-processor-4.9.2.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut.micrometer/micronaut-micrometer-annotation/5.12.0/b92b53649f3d2aa543c2e0d41da6b33a87078756/micronaut-micrometer-annotation-5.12.0.jar" />
@@ -43,7 +70,7 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.projectreactor/reactor-core/3.7.7/bee553bf17e911f6c20fe45caa890b9a3fd19c/reactor-core-3.7.7.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut/micronaut-core/4.9.9/5e69cd89a08b62491654159235513bffb19073d9/micronaut-core-4.9.9.jar" />
-          <entry name="$MAVEN_REPOSITORY$/jakarta/ws/rs/jakarta.ws.rs-api/3.1.0/jakarta.ws.rs-api-3.1.0.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.ws.rs/jakarta.ws.rs-api/3.1.0/15ce10d249a38865b58fc39521f10f29ab0e3363/jakarta.ws.rs-api-3.1.0.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/2.0.17/d9e58ac9c7779ba3bf8142aff6c830617a7fe60f/slf4j-api-2.0.17.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-core/1.15.0/76a8b4e49d97fc1fde06ec462d0819a62f6e1a38/micrometer-core-1.15.0.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-observation/1.15.0/1bcd42cb00aead4d441038fa86b0e6b41922e254/micrometer-observation-1.15.0.jar" />
@@ -101,7 +128,7 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.projectreactor/reactor-core/3.7.7/bee553bf17e911f6c20fe45caa890b9a3fd19c/reactor-core-3.7.7.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micronaut/micronaut-core/4.9.9/5e69cd89a08b62491654159235513bffb19073d9/micronaut-core-4.9.9.jar" />
-          <entry name="$MAVEN_REPOSITORY$/jakarta/ws/rs/jakarta.ws.rs-api/3.1.0/jakarta.ws.rs-api-3.1.0.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.ws.rs/jakarta.ws.rs-api/3.1.0/15ce10d249a38865b58fc39521f10f29ab0e3363/jakarta.ws.rs-api-3.1.0.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/2.0.17/d9e58ac9c7779ba3bf8142aff6c830617a7fe60f/slf4j-api-2.0.17.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-core/1.15.0/76a8b4e49d97fc1fde06ec462d0819a62f6e1a38/micrometer-core-1.15.0.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-observation/1.15.0/1bcd42cb00aead4d441038fa86b0e6b41922e254/micrometer-observation-1.15.0.jar" />
@@ -124,33 +151,6 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.javaparser/javaparser-core/3.26.4/7b3a0c67b941a9040d9b3a27f7496b4f34297def/javaparser-core-3.26.4.jar" />
         </processorPath>
         <module name="beyond-spring-boot.micronaut.test" />
-      </profile>
-      <profile name="Gradle Imported" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.orm/hibernate-processor/7.1.0.Final/32dd22f05126d3406b605535ac5a452130e1356f/hibernate-processor-7.1.0.Final.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.orm/hibernate-core/7.1.0.Final/478e5ed01a619146d3ee22449c537f34fde0a2f5/hibernate-core-7.1.0.Final.jar" />
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate.models/hibernate-models/1.0.1/3158c5f9309494b905de62c72f6f02d108aea651/hibernate-models-1.0.1.jar" />
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.smallrye/jandex/3.3.1/cea8c28faa729cbc00a6d397cf28f12ae9a577f0/jandex-3.3.1.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar" />
-          <entry name="$MAVEN_REPOSITORY$/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar" />
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.validation/jakarta.validation-api/3.1.1/ec8622148afc5564235d17af80ea80288d0e7f92/jakarta.validation-api-3.1.1.jar" />
-          <entry name="$MAVEN_REPOSITORY$/jakarta/annotation/jakarta.annotation-api/3.0.0/jakarta.annotation-api-3.0.0.jar" />
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4-runtime/4.13.2/fc3db6d844df652a3d5db31c87fa12757f13691d/antlr4-runtime-4.13.2.jar" />
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.17.6/8c70cbc6950b2ae5291a98d5003e06406d633803/byte-buddy-1.17.6.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar" />
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.persistence/jakarta.persistence-api/3.2.0/bb75a113f3fa191c2c7ee7b206d8e674251b3129/jakarta.persistence-api-3.2.0.jar" />
-          <entry name="$MAVEN_REPOSITORY$/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar" />
-          <entry name="$MAVEN_REPOSITORY$/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar" />
-          <entry name="$MAVEN_REPOSITORY$/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar" />
-          <entry name="$MAVEN_REPOSITORY$/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar" />
-          <entry name="$MAVEN_REPOSITORY$/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar" />
-        </processorPath>
-        <module name="beyond-spring-boot.helidon-mp.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="21">
