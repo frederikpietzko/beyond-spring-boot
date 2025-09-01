@@ -2,7 +2,7 @@ plugins {
   kotlin("jvm")
 }
 
-val exposedVersion = "1.0.0-beta-5"
+val exposedVersion: String by project
 
 dependencies {
   implementation("io.javalin:javalin:6.7.0")

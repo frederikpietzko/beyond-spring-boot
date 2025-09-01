@@ -18,4 +18,5 @@ include(
   "helidon-mp",
   "helidon-se",
   "javalin",
+  "ktor",
 )

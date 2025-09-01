@@ -2,21 +2,23 @@ package com.github.frederikpietzko
 
 import com.github.frederikpietzko.model.Pet
 import com.github.frederikpietzko.model.Visit
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.singleOrNull
 import org.jetbrains.exposed.v1.core.JoinType
 import org.jetbrains.exposed.v1.core.ResultRow
-import org.jetbrains.exposed.v1.jdbc.insertAndGetId
-import org.jetbrains.exposed.v1.jdbc.selectAll
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import org.jetbrains.exposed.v1.r2dbc.insertAndGetId
+import org.jetbrains.exposed.v1.r2dbc.selectAll
+import org.jetbrains.exposed.v1.r2dbc.transactions.suspendTransaction
 
 object VisitRepository {
-  fun getVisits() = transaction {
+  suspend fun getVisits() = suspendTransaction {
     VisitTable
       .join(PetTable, JoinType.INNER)
       .selectAll()
       .map { it.toVisit() }
   }
 
-  fun findVisitById(id: Long) = transaction {
+  suspend fun findVisitById(id: Long) = suspendTransaction {
     VisitTable
       .join(PetTable, JoinType.INNER)
       .selectAll()
@@ -25,7 +27,7 @@ object VisitRepository {
       .singleOrNull()
   }
 
-  fun save(visit: Visit) = transaction {
+  suspend fun save(visit: Visit) = suspendTransaction {
     val petId = visit.pet.id ?: PetTable.insertAndGetId {
       it[name] = visit.pet.name
       it[age] = visit.pet.age
