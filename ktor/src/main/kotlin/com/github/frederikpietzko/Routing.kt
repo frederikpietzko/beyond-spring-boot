@@ -17,10 +17,9 @@ fun Application.setupRouting() {
         val visits = VisitRepository
           .getVisits()
           .map { it.toDto() }
-          .toList()
         call.respond(visits)
       }
-      get("/{id") {
+      get("/{id}") {
         val visit = call
           .parameters["id"]
           ?.toLongOrNull()

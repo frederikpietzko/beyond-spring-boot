@@ -22,6 +22,7 @@ object VisitTable : LongIdTable("visit") {
 suspend fun initTables() = suspendTransaction(db = DbSettings.db) {
   SchemaUtils.drop(PetTable, VisitTable, inBatch = true)
   SchemaUtils.create(PetTable, VisitTable, inBatch = true)
+  commit()
 }
 
 object DbSettings {

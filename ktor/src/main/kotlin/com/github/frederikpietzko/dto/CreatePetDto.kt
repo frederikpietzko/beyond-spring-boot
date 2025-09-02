@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CreatePetDto(
-  val id: Long?,
+  val id: Long? = null,
   val name: String,
   val age: Int,
   val type: Type,

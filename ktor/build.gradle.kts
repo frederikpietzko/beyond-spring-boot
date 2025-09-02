@@ -6,7 +6,7 @@ plugins {
 }
 
 application {
-  mainClass.set("io.ktor.server.netty.EngineMain")
+  mainClass.set("io.ktor.server.cio.EngineMain")
 }
 
 val ktor_version: String by project
@@ -14,8 +14,8 @@ val exposedVersion: String by project
 
 dependencies {
   implementation("io.ktor:ktor-server-status-pages:$ktor_version")
-  implementation("io.ktor:ktor-server-core-jvm")
-  implementation("io.ktor:ktor-server-netty-jvm")
+  implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
+  implementation("io.ktor:ktor-server-cio-jvm:$ktor_version")
   implementation("ch.qos.logback:logback-classic:1.5.18")
   implementation("io.ktor:ktor-server-config-yaml:$ktor_version")
 

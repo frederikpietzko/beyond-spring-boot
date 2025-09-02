@@ -4,6 +4,7 @@ import com.github.frederikpietzko.model.Pet
 import com.github.frederikpietzko.model.Visit
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.singleOrNull
+import kotlinx.coroutines.flow.toList
 import org.jetbrains.exposed.v1.core.JoinType
 import org.jetbrains.exposed.v1.core.ResultRow
 import org.jetbrains.exposed.v1.r2dbc.insertAndGetId
@@ -11,11 +12,12 @@ import org.jetbrains.exposed.v1.r2dbc.selectAll
 import org.jetbrains.exposed.v1.r2dbc.transactions.suspendTransaction
 
 object VisitRepository {
-  suspend fun getVisits() = suspendTransaction {
+  suspend fun getVisits() = suspendTransaction(db = DbSettings.db) {
     VisitTable
       .join(PetTable, JoinType.INNER)
       .selectAll()
       .map { it.toVisit() }
+      .toList()
   }
 
   suspend fun findVisitById(id: Long) = suspendTransaction {
