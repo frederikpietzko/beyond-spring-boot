@@ -22,10 +22,7 @@ dependencies {
   implementation("org.slf4j:jul-to-slf4j")
   implementation("ch.qos.logback:logback-classic:1.5.18")
 
-  implementation("io.helidon.webserver.observe:helidon-webserver-observe-health")
-  implementation("io.helidon.webserver.observe:helidon-webserver-observe-metrics")
   implementation("io.helidon.config:helidon-config-yaml")
-  implementation("io.helidon.health:helidon-health-checks")
 
   implementation("io.helidon.dbclient:helidon-dbclient")
   implementation("io.helidon.dbclient:helidon-dbclient-jdbc")

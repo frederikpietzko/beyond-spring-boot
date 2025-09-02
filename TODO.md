@@ -1,15 +1,22 @@
 # TODO
 
-- [ ] Helidon MP Logging, Tracing, Metrics
-- [ ] Helidon SE Logging, Tracing, Metrics
+- [ ] Quarkus
+    - [x] Implementation
+    - [ ] Loadtest
+- [ ] Micronaut
+    - [x] Implementation
+    - [ ] Loadtest
 - [ ] Javalin
     - [x] Implementation
-    - [ ] Logging, Tracing, Metrics Implementation
+    - [ ] Loadtest
 - [ ] Ktor
-    - [ ] Implementation
-    - [ ] Logging, Tracing, Metrics Implementation
+    - [x] Implementation
+    - [ ] Loadtest
 - [ ] Http4k With Helidon?
     - [ ] Implementation
-    - [ ] Logging, Tracing, Metrics Implementation
-- [ ] Loadtest
+    - [ ] Loadtest
 - [ ] Presentation
+    - [ ] Programming Examples
+    - [ ] Benchmark Results
+    - [ ] DX
+    - [ ] Conclusion

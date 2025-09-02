@@ -9,8 +9,8 @@ import io.javalin.http.bodyAsClass
 
 fun main() {
   setupDatabase()
-  Javalin.create {
-    it.router.apiBuilder {
+  Javalin.create { config ->
+    config.router.apiBuilder {
       get("/visits") { ctx ->
         ctx.json(
           VisitRepository
