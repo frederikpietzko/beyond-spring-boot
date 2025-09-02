@@ -19,4 +19,5 @@ include(
   "helidon-se",
   "javalin",
   "ktor",
+  "http4k"
 )
