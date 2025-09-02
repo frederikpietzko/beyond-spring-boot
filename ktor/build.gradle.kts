@@ -25,6 +25,7 @@ dependencies {
   implementation("org.jetbrains.exposed:exposed-migration:${exposedVersion}")
 
   implementation("org.postgresql:r2dbc-postgresql:1.0.7.RELEASE")
+  implementation("io.r2dbc:r2dbc-pool:1.0.2.RELEASE")
   implementation("io.ktor:ktor-server-core:${ktor_version}")
   implementation("io.ktor:ktor-server-content-negotiation:${ktor_version}")
   implementation("io.ktor:ktor-server-core:${ktor_version}")

@@ -28,7 +28,7 @@ suspend fun initTables() = suspendTransaction(db = DbSettings.db) {
 object DbSettings {
   val db by lazy {
     R2dbcDatabase.connect(
-      url = "r2dbc:postgresql://localhost:5432/postgres",
+      url = "r2dbc:pool:postgresql://localhost:5432/postgres",
       user = "pg",
       password = "pg",
     )
