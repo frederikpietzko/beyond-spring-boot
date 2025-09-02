@@ -12,7 +12,7 @@ import org.jetbrains.exposed.v1.r2dbc.selectAll
 import org.jetbrains.exposed.v1.r2dbc.transactions.suspendTransaction
 
 object VisitRepository {
-  suspend fun getVisits() = suspendTransaction(db = DbSettings.db) {
+  suspend fun getVisits() = suspendTransaction {
     VisitTable
       .join(PetTable, JoinType.INNER)
       .selectAll()
