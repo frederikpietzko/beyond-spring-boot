@@ -1,0 +1,9 @@
+{
+  "description": "My Cat is barfing a lot",
+  "dateTime": "2025-10-01T12:00:00Z",
+  "pet": {
+    "name": "Thor",
+    "age": 5,
+    "type": "CAT"
+  }
+}
