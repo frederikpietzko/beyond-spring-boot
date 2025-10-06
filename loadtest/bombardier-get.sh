@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 bombardier \
-  --connections=100 \
+  --connections=500 \
   --method=GET \
   --header="Accept: application/json" \
   --requests=100000 \

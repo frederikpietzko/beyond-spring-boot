@@ -1,0 +1,30 @@
+package com.github.frederikpietzko.model;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import java.time.OffsetDateTime;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "visit")
+public class VisitEntity extends BaseEntity {
+  @NotEmpty
+  public String description;
+  @NotNull
+  @ManyToOne(
+    optional = false,
+    cascade = CascadeType.ALL
+  )
+  public PetEntity pet;
+  @NotNull
+  public OffsetDateTime dateTime;
+
+}
