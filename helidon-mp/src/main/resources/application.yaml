@@ -3,10 +3,12 @@ javax:
     DataSource:
       default:
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+        maximumPoolSize: 100
+        minimumIdle: 20
         dataSource:
           url: jdbc:postgresql://localhost:5432/postgres
           user: pg
           password: pg
 hibernate:
   hbm2ddl:
-    auto: create-drop
+    auto: update

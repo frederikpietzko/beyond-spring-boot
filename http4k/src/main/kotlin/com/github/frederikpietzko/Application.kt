@@ -15,7 +15,7 @@ import org.http4k.format.KotlinxSerialization.auto
 import org.http4k.routing.bind
 import org.http4k.routing.path
 import org.http4k.routing.routes
-import org.http4k.server.Undertow
+import org.http4k.server.Helidon
 import org.http4k.server.asServer
 
 fun main() {
@@ -46,7 +46,7 @@ fun main() {
       val visit = VisitRepository
         .findVisitById(id)
         .let { it?.toDto() }
-      if(visit == null) {
+      if (visit == null) {
         Response(NOT_FOUND)
       } else {
         Response(OK).with(visitDtoLens of visit)
@@ -54,5 +54,5 @@ fun main() {
     },
   )
 
-  app.asServer(Undertow(8080)).start()
+  app.asServer(Helidon(8080)).start()
 }

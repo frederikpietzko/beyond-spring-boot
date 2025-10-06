@@ -12,7 +12,7 @@ import org.jetbrains.exposed.v1.migration.MigrationUtils
 object PetTable : LongIdTable("pet") {
   val name = varchar("name", 255)
   val age = integer("age")
-  val type = enumeration<Type>("type")
+  val type = enumerationByName<Type>("type", 255)
 }
 
 object VisitTable : LongIdTable("visit") {

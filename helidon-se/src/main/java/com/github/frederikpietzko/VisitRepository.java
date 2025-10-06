@@ -80,7 +80,7 @@ public class VisitRepository {
       row.column("id").asLong().orElseThrow(),
       row.column("description").asString().orElseThrow(),
       mapPet(row),
-      row.column("datetime").as(ZonedDateTime.class).orElseThrow()
+      row.column("date_time").as(ZonedDateTime.class).orElseThrow()
     );
   }
 

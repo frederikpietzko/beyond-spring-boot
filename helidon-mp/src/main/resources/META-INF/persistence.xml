@@ -7,8 +7,8 @@
         <description>Default database</description>
         <jta-data-source>default</jta-data-source>
         <class>com.github.frederikpietzko.model.BaseEntity</class>
-        <class>com.github.frederikpietzko.model.Pet</class>
-        <class>com.github.frederikpietzko.model.Visit</class>
+        <class>com.github.frederikpietzko.model.PetEntity</class>
+        <class>com.github.frederikpietzko.model.VisitEntity</class>
         <class>com.github.frederikpietzko.model.Type</class>
         <properties>
             <!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->

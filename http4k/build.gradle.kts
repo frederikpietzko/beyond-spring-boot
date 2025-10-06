@@ -6,11 +6,15 @@ plugins {
 
 val exposedVersion: String by project
 
+application {
+  mainClass.set("com.github.frederikpietzko.ApplicationKt")
+}
+
 dependencies {
   implementation(platform("org.http4k:http4k-bom:6.15.1.0"))
 
   implementation("org.http4k:http4k-core")
-  implementation("org.http4k:http4k-server-undertow")
+  implementation("org.http4k:http4k-server-helidon")
   implementation("org.http4k:http4k-format-kotlinx-serialization")
 
   implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
