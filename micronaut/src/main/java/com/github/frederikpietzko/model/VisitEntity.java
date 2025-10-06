@@ -1,9 +1,6 @@
 package com.github.frederikpietzko.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -25,6 +22,7 @@ public class VisitEntity extends BaseEntity {
   )
   public PetEntity pet;
   @NotNull
+  @Column(name = "date_time")
   public OffsetDateTime dateTime;
 
 }

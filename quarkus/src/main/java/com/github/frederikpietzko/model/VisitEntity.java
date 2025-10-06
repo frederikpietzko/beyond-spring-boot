@@ -1,10 +1,7 @@
 package com.github.frederikpietzko.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -26,6 +23,6 @@ public class VisitEntity extends PanacheEntity {
   )
   public PetEntity pet;
   @NotNull
-  public OffsetDateTime dateTime;
-
+  @Column(name = "date_time")
+  public OffsetDateTime dateTime = OffsetDateTime.now();
 }

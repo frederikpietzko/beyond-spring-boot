@@ -26,5 +26,4 @@ public class VisitEntity extends BaseEntity {
   public PetEntity pet;
   @NotNull
   public OffsetDateTime dateTime;
-
 }
