@@ -2,7 +2,7 @@ spring:
   application:
     name: spring-boot
   datasource:
-    url: "jdbc:postgresql://localhost:5432/postgres"
+    url: "jdbc:postgresql://localhost:6432/postgres?prepareThreshold=0"
     username: "pg"
     password: "pg"
     driver-class-name: org.postgresql.Driver
