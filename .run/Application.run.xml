@@ -4,12 +4,12 @@
         <envs>
             <env name="OTEL_SERVICE_NAME" value="micronaut"/>
         </envs>
-        <option name="MAIN_CLASS_NAME" value="com.github.frederikpietzko.Application"/>
+        <option name="MAIN_CLASS_NAME" value="com.github.com.github.frederikpietzko.Application"/>
         <module name="beyond-spring-boot.micronaut.main"/>
         <option name="VM_PARAMETERS" value="-Dotel.java.global-autoconfigure.enabled=true"/>
         <option name="alternativeJrePath"/>
         <option name="alternativeJrePathEnabled" value="false"/>
-        <option name="mainClass" value="com.github.frederikpietzko.Application"/>
+        <option name="mainClass" value="com.github.com.github.frederikpietzko.Application"/>
         <option name="passParentEnvs" value="true"/>
         <option name="programParameters" value=""/>
         <option name="vmParameters" value="-Dotel.java.global-autoconfigure.enabled=true"/>

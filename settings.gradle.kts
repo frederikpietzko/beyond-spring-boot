@@ -14,6 +14,7 @@ pluginManagement {
 rootProject.name = "beyond-spring-boot"
 include(
   "spring-boot",
+  "spring-boot-jdbc",
   "quarkus",
   "micronaut",
   "helidon-mp",

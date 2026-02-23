@@ -6,10 +6,10 @@
     <persistence-unit name="default" transaction-type="JTA">
         <description>Default database</description>
         <jta-data-source>default</jta-data-source>
-        <class>com.github.frederikpietzko.model.BaseEntity</class>
-        <class>com.github.frederikpietzko.model.PetEntity</class>
-        <class>com.github.frederikpietzko.model.VisitEntity</class>
-        <class>com.github.frederikpietzko.model.Type</class>
+        <class>com.github.model.com.github.frederikpietzko.BaseEntity</class>
+        <class>com.github.model.com.github.frederikpietzko.PetEntity</class>
+        <class>com.github.model.com.github.frederikpietzko.VisitEntity</class>
+        <class>com.github.model.com.github.frederikpietzko.Type</class>
         <properties>
             <!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
             <!--            <property name="jakarta.persistence.schema-generation.create-script-source" value="create-db.sql"/>-->
