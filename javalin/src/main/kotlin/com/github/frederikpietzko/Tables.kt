@@ -32,7 +32,7 @@ private fun initTables() = transaction {
 
 fun setupDatabase() {
   val config = HikariConfig().apply {
-    jdbcUrl = "jdbc:postgresql://localhost:5432/postgres"
+    jdbcUrl = "jdbc:postgresql://localhost:6432/postgres"
     username = "pg"
     password = "pg"
   }
