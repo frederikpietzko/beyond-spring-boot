@@ -16,6 +16,7 @@ include(
   "spring-boot",
   "spring-boot-jdbc",
   "quarkus",
+  "quarkus-jdbi",
   "micronaut",
   "helidon-mp",
   "helidon-se",
