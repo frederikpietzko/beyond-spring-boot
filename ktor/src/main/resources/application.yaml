@@ -4,3 +4,7 @@ ktor:
   application:
     modules:
       - com.github.frederikpietzko.AppKt.main
+db:
+  jdbcUrl: "jdbc:postgresql://localhost:6432/postgres"
+  username: "pg"
+  password: "pg"

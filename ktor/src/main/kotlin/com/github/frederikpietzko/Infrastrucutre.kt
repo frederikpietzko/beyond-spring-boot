@@ -12,5 +12,10 @@ fun Application.setupSerialization() {
 }
 
 suspend fun Application.setupDatabase() {
+  val jdbcUrl = environment.config.property("db.jdbcUrl").getString()
+  val username = environment.config.property("db.username").getString()
+  val password = environment.config.property("db.password").getString()
+
+  DbSettings.init(jdbcUrl, username, password)
   initTables()
 }

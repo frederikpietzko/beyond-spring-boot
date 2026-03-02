@@ -21,18 +21,18 @@ object VisitTable : LongIdTable("visit") {
   val dateTime = timestampWithTimeZone("date_time")
 }
 
-suspend fun initTables() = newSuspendedTransaction(db = DbSettings.db) {
+suspend fun initTables() = newSuspendedTransaction {
   SchemaUtils.drop(PetTable, VisitTable, inBatch = true)
   SchemaUtils.create(PetTable, VisitTable, inBatch = true)
   commit()
 }
 
 object DbSettings {
-  val db by lazy {
+  fun init(jdbcUrl: String, username: String, password: String) {
     val config = HikariConfig().apply {
-      jdbcUrl = "jdbc:postgresql://localhost:5432/postgres"
-      username = "pg"
-      password = "pg"
+      this.jdbcUrl = jdbcUrl
+      this.username = username
+      this.password = password
       driverClassName = "org.postgresql.Driver"
       maximumPoolSize = 10
     }
