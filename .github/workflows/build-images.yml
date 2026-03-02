@@ -8,6 +8,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        module:
+          - spring-boot
+          - spring-boot-jdbc
+          - quarkus
+          - quarkus-jdbi
+          - micronaut
+          - micronaut-jdbc
+          - ktor
+          - helidon-mp
+          - helidon-se
+          - javalin
+          - http4k
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,53 +47,35 @@ jobs:
       - name: Set GIT_SHORT_HASH
         run: echo "GIT_SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      - name: Build and Push Spring Boot Images
-        run: ./gradlew :spring-boot:bootBuildImage :spring-boot-jdbc:bootBuildImage --publishImage
+      - name: Build and Push Spring Boot Image
+        if: matrix.module == 'spring-boot' || matrix.module == 'spring-boot-jdbc'
+        run: ./gradlew :${{ matrix.module }}:bootBuildImage --publishImage
 
-      - name: Build and Push Quarkus Images
+      - name: Build and Push Quarkus Image
+        if: matrix.module == 'quarkus' || matrix.module == 'quarkus-jdbi'
         run: |
-          ./gradlew :quarkus:build \
+          ./gradlew :${{ matrix.module }}:build \
+            -Dquarkus.hibernate-orm.database.generation=none \
             -Dquarkus.container-image.build=true \
             -Dquarkus.container-image.push=true \
             -Dquarkus.container-image.group=frederikpietzko \
-            -Dquarkus.container-image.name=quarkus \
-            -Dquarkus.container-image.tag=${{ env.GIT_SHORT_HASH }}
-          ./gradlew :quarkus-jdbi:build \
-            -Dquarkus.container-image.build=true \
-            -Dquarkus.container-image.push=true \
-            -Dquarkus.container-image.group=frederikpietzko \
-            -Dquarkus.container-image.name=quarkus-jdbi \
+            -Dquarkus.container-image.name=${{ matrix.module }} \
             -Dquarkus.container-image.tag=${{ env.GIT_SHORT_HASH }}
 
-      - name: Build and Push Micronaut Images
+      - name: Build and Push Micronaut Image
+        if: matrix.module == 'micronaut' || matrix.module == 'micronaut-jdbc'
         run: |
-          ./gradlew :micronaut:dockerPush \
-            -Dmicronaut.docker.imageName=frederikpietzko/micronaut:${{ env.GIT_SHORT_HASH }}
-          ./gradlew :micronaut-jdbc:dockerPush \
-            -Dmicronaut.docker.imageName=frederikpietzko/micronaut-jdbc:${{ env.GIT_SHORT_HASH }}
+          ./gradlew :${{ matrix.module }}:dockerPush \
+            -Dmicronaut.docker.imageName=frederikpietzko/${{ matrix.module }}:${{ env.GIT_SHORT_HASH }}
 
-      - name: Build and Push Ktor Image
+      - name: Build and Push Dockerfile-based Image
+        if: >
+          matrix.module == 'ktor' ||
+          matrix.module == 'helidon-mp' ||
+          matrix.module == 'helidon-se' ||
+          matrix.module == 'javalin' ||
+          matrix.module == 'http4k'
         run: |
-          ./gradlew :ktor:assemble
-          docker build -t frederikpietzko/ktor:${{ env.GIT_SHORT_HASH }} ./ktor
-          docker push frederikpietzko/ktor:${{ env.GIT_SHORT_HASH }}
-
-      - name: Build and Push Helidon Images
-        run: |
-          ./gradlew :helidon-mp:assemble :helidon-se:assemble
-          docker build -t frederikpietzko/helidon-mp:${{ env.GIT_SHORT_HASH }} ./helidon-mp
-          docker push frederikpietzko/helidon-mp:${{ env.GIT_SHORT_HASH }}
-          docker build -t frederikpietzko/helidon-se:${{ env.GIT_SHORT_HASH }} ./helidon-se
-          docker push frederikpietzko/helidon-se:${{ env.GIT_SHORT_HASH }}
-
-      - name: Build and Push Javalin Image
-        run: |
-          ./gradlew :javalin:assemble
-          docker build -t frederikpietzko/javalin:${{ env.GIT_SHORT_HASH }} ./javalin
-          docker push frederikpietzko/javalin:${{ env.GIT_SHORT_HASH }}
-
-      - name: Build and Push http4k Image
-        run: |
-          ./gradlew :http4k:assemble
-          docker build -t frederikpietzko/http4k:${{ env.GIT_SHORT_HASH }} ./http4k
-          docker push frederikpietzko/http4k:${{ env.GIT_SHORT_HASH }}
+          ./gradlew :${{ matrix.module }}:assemble
+          docker build -t frederikpietzko/${{ matrix.module }}:${{ env.GIT_SHORT_HASH }} ./${{ matrix.module }}
+          docker push frederikpietzko/${{ matrix.module }}:${{ env.GIT_SHORT_HASH }}
