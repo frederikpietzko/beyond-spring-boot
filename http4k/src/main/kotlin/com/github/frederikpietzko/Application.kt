@@ -1,5 +1,8 @@
 package com.github.frederikpietzko
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.github.frederikpietzko.dto.CreateVisitDto
 import com.github.frederikpietzko.dto.VisitDto
 import com.github.frederikpietzko.dto.toDto
@@ -19,7 +22,17 @@ import org.http4k.server.Helidon
 import org.http4k.server.asServer
 
 fun main() {
-  setupDatabase()
+  val yamlMapper = ObjectMapper(YAMLFactory()).registerKotlinModule()
+  val configStream = Thread.currentThread().contextClassLoader.getResourceAsStream("application.yaml")
+  val appConfig = yamlMapper.readTree(configStream)
+  val dbConfig = appConfig.get("db")
+
+  DbSettings.init(
+    jdbcUrl = dbConfig.get("jdbcUrl").asText(),
+    username = dbConfig.get("username").asText(),
+    password = dbConfig.get("password").asText(),
+  )
+
   val visitDtoListLens = Body.auto<List<VisitDto>>().toLens()
   val visitDtoLens = Body.auto<VisitDto>().toLens()
   val requestLens = Body.auto<CreateVisitDto>().toLens()
