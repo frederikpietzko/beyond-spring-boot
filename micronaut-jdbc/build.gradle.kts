@@ -1,3 +1,4 @@
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import io.micronaut.gradle.docker.MicronautDockerfile
 import io.micronaut.gradle.docker.NativeImageDockerfile
 
@@ -58,12 +59,15 @@ micronaut {
     optimizeNetty = true
     replaceLogbackXml = true
   }
-  dockerImages.create("frederikpietzko/${project.name}:${project.version}")
 }
 
 tasks.named<MicronautDockerfile>("dockerfile") {
   baseImage.set("gcr.io/distroless/java21-debian12")
   exposedPorts.set(listOf(8080))
+}
+
+tasks.named<DockerBuildImage>("dockerBuild") {
+  images.add("frederikpietzko/${project.name}:${project.version}")
 }
 
 tasks.named<NativeImageDockerfile>("dockerfileNative") {
