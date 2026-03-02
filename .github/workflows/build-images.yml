@@ -1,0 +1,84 @@
+name: Build and Push Images
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Set GIT_SHORT_HASH
+        run: echo "GIT_SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Build and Push Spring Boot Images
+        run: ./gradlew :spring-boot:bootBuildImage :spring-boot-jdbc:bootBuildImage --publishImage
+
+      - name: Build and Push Quarkus Images
+        run: |
+          ./gradlew :quarkus:build \
+            -Dquarkus.container-image.build=true \
+            -Dquarkus.container-image.push=true \
+            -Dquarkus.container-image.group=frederikpietzko \
+            -Dquarkus.container-image.name=quarkus \
+            -Dquarkus.container-image.tag=${{ env.GIT_SHORT_HASH }}
+          ./gradlew :quarkus-jdbi:build \
+            -Dquarkus.container-image.build=true \
+            -Dquarkus.container-image.push=true \
+            -Dquarkus.container-image.group=frederikpietzko \
+            -Dquarkus.container-image.name=quarkus-jdbi \
+            -Dquarkus.container-image.tag=${{ env.GIT_SHORT_HASH }}
+
+      - name: Build and Push Micronaut Images
+        run: |
+          ./gradlew :micronaut:dockerPush \
+            -Dmicronaut.docker.imageName=frederikpietzko/micronaut:${{ env.GIT_SHORT_HASH }}
+          ./gradlew :micronaut-jdbc:dockerPush \
+            -Dmicronaut.docker.imageName=frederikpietzko/micronaut-jdbc:${{ env.GIT_SHORT_HASH }}
+
+      - name: Build and Push Ktor Image
+        run: |
+          ./gradlew :ktor:assemble
+          docker build -t frederikpietzko/ktor:${{ env.GIT_SHORT_HASH }} ./ktor
+          docker push frederikpietzko/ktor:${{ env.GIT_SHORT_HASH }}
+
+      - name: Build and Push Helidon Images
+        run: |
+          ./gradlew :helidon-mp:assemble :helidon-se:assemble
+          docker build -t frederikpietzko/helidon-mp:${{ env.GIT_SHORT_HASH }} ./helidon-mp
+          docker push frederikpietzko/helidon-mp:${{ env.GIT_SHORT_HASH }}
+          docker build -t frederikpietzko/helidon-se:${{ env.GIT_SHORT_HASH }} ./helidon-se
+          docker push frederikpietzko/helidon-se:${{ env.GIT_SHORT_HASH }}
+
+      - name: Build and Push Javalin Image
+        run: |
+          ./gradlew :javalin:assemble
+          docker build -t frederikpietzko/javalin:${{ env.GIT_SHORT_HASH }} ./javalin
+          docker push frederikpietzko/javalin:${{ env.GIT_SHORT_HASH }}
+
+      - name: Build and Push http4k Image
+        run: |
+          ./gradlew :http4k:assemble
+          docker build -t frederikpietzko/http4k:${{ env.GIT_SHORT_HASH }} ./http4k
+          docker push frederikpietzko/http4k:${{ env.GIT_SHORT_HASH }}
