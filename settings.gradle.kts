@@ -18,6 +18,7 @@ include(
   "quarkus",
   "quarkus-jdbi",
   "micronaut",
+  "micronaut-jdbc",
   "helidon-mp",
   "helidon-se",
   "javalin",
