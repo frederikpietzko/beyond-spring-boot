@@ -83,9 +83,15 @@ tasks.jar {
   }
 }
 
+tasks.register<Exec>("dockerBuild") {
+  dependsOn("assemble")
+  group = "docker"
+  commandLine("docker", "build", "-t", "frederikpietzko/${project.name}:${project.version}", ".")
+}
+
 val copyBeansXML = tasks.register<Copy>("moveBeansXML") {
-    from("${layout.buildDirectory.get()}/resources/main/META-INF/beans.xml")
-    into("${layout.buildDirectory.get()}/classes/java/main/META-INF")
+  from("${layout.buildDirectory.get()}/resources/main/META-INF/beans.xml")
+  into("${layout.buildDirectory.get()}/classes/java/main/META-INF")
 }
 
 tasks.compileTestJava {

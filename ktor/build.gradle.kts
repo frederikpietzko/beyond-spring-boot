@@ -9,6 +9,33 @@ application {
   mainClass.set("io.ktor.server.cio.EngineMain")
 }
 
+tasks.register<Copy>("copyLibs") {
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+  from(configurations.runtimeClasspath.get())
+  into("${layout.buildDirectory.get()}/libs/libs")
+}
+
+tasks.assemble {
+  dependsOn("copyLibs")
+}
+
+tasks.jar {
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+  archiveFileName = "${project.name}.jar"
+  manifest {
+    attributes(
+      "Main-Class" to application.mainClass.get(),
+      "Class-Path" to configurations.runtimeClasspath.get().files.map { "libs/${it.name}" }.joinToString { " " },
+    )
+  }
+}
+
+tasks.register<Exec>("dockerBuild") {
+  dependsOn("assemble")
+  group = "docker"
+  commandLine("docker", "build", "-t", "frederikpietzko/${project.name}:${project.version}", ".")
+}
+
 val ktor_version: String by project
 val exposedVersion: String by project
 

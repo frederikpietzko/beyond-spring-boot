@@ -1,3 +1,6 @@
+import io.micronaut.gradle.docker.MicronautDockerfile
+import io.micronaut.gradle.docker.NativeImageDockerfile
+
 plugins {
   java
   id("io.micronaut.application")
@@ -57,8 +60,11 @@ micronaut {
   }
 }
 
+tasks.named<MicronautDockerfile>("dockerfile") {
+  baseImage.set("gcr.io/distroless/java21-debian12")
+}
 
-tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
+tasks.named<NativeImageDockerfile>("dockerfileNative") {
   jdkVersion = "21"
 }
 

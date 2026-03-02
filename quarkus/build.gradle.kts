@@ -25,7 +25,6 @@ dependencies {
 }
 
 group = "com.github.frederikpietzko"
-version = "1.0-SNAPSHOT"
 
 java {
   sourceCompatibility = JavaVersion.VERSION_21

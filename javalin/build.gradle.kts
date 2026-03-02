@@ -9,6 +9,33 @@ application {
   mainClass.set("com.github.frederikpietzko.AppKt")
 }
 
+tasks.register<Copy>("copyLibs") {
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+  from(configurations.runtimeClasspath.get())
+  into("${layout.buildDirectory.get()}/libs/libs")
+}
+
+tasks.assemble {
+  dependsOn("copyLibs")
+}
+
+tasks.jar {
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+  archiveFileName = "${project.name}.jar"
+  manifest {
+    attributes(
+      "Main-Class" to application.mainClass.get(),
+      "Class-Path" to configurations.runtimeClasspath.get().files.map { "libs/${it.name}" }.joinToString { " " },
+    )
+  }
+}
+
+tasks.register<Exec>("dockerBuild") {
+  dependsOn("assemble")
+  group = "docker"
+  commandLine("docker", "build", "-t", "frederikpietzko/${project.name}:${project.version}", ".")
+}
+
 dependencies {
   implementation("io.javalin:javalin:6.7.0")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.2")

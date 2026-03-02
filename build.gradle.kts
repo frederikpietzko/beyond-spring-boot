@@ -10,12 +10,14 @@ plugins {
   id("org.hibernate.orm") version "7.1.0.Final" apply false
 }
 
+val buildVersion = System.getenv("GIT_SHORT_HASH") ?: "1.0.0"
+
 group = "com.github.frederikpietzko"
-version = "1.0.0"
+version = buildVersion
 
 allprojects {
   group = "com.github.frederikpietzko"
-  version = "1.0.0"
+  version = buildVersion
 
   repositories {
     mavenLocal()
