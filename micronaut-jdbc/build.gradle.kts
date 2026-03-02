@@ -67,7 +67,11 @@ tasks.named<MicronautDockerfile>("dockerfile") {
 }
 
 tasks.named<DockerBuildImage>("dockerBuild") {
-  images.add("frederikpietzko/${project.name}:${project.version}")
+  images.set(listOf("frederikpietzko/${project.name}:${project.version}"))
+}
+
+tasks.named<DockerBuildImage>("dockerBuildNative") {
+  images.set(listOf("frederikpietzko/${project.name}-native:${project.version}"))
 }
 
 tasks.named<NativeImageDockerfile>("dockerfileNative") {
