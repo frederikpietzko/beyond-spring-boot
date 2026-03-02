@@ -54,7 +54,7 @@ jobs:
       - name: Build and Push Quarkus Image
         if: matrix.module == 'quarkus' || matrix.module == 'quarkus-jdbi'
         run: |
-          ./gradlew :${{ matrix.module }}:build \
+          ./gradlew :${{ matrix.module }}:build -x test \
             -Dquarkus.hibernate-orm.database.generation=none \
             -Dquarkus.container-image.build=true \
             -Dquarkus.container-image.push=true \
@@ -65,8 +65,9 @@ jobs:
       - name: Build and Push Micronaut Image
         if: matrix.module == 'micronaut' || matrix.module == 'micronaut-jdbc'
         run: |
-          ./gradlew :${{ matrix.module }}:dockerPush \
-            -Dmicronaut.docker.imageName=frederikpietzko/${{ matrix.module }}:${{ env.GIT_SHORT_HASH }}
+          ./gradlew :${{ matrix.module }}:dockerPush -x test \
+            -Dmicronaut.io.docker.image.repository=frederikpietzko/${{ matrix.module }} \
+            -Dmicronaut.io.docker.image.tag=${{ env.GIT_SHORT_HASH }}
 
       - name: Build and Push Dockerfile-based Image
         if: >
