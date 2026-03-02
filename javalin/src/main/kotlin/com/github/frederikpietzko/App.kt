@@ -1,6 +1,7 @@
 package com.github.frederikpietzko
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.github.frederikpietzko.dto.CreateVisitDto
@@ -12,7 +13,17 @@ import io.javalin.http.bodyAsClass
 import io.javalin.json.JavalinJackson
 
 fun main() {
-  setupDatabase()
+  val yamlMapper = ObjectMapper(YAMLFactory()).registerKotlinModule()
+  val configStream = Thread.currentThread().contextClassLoader.getResourceAsStream("application.yaml")
+  val appConfig = yamlMapper.readTree(configStream)
+  val dbConfig = appConfig.get("db")
+
+  DbSettings.init(
+    jdbcUrl = dbConfig.get("jdbcUrl").asText(),
+    username = dbConfig.get("username").asText(),
+    password = dbConfig.get("password").asText(),
+  )
+
   val objectMapper = ObjectMapper().registerKotlinModule()
     .registerModule(JavaTimeModule())
   Javalin.create { config ->

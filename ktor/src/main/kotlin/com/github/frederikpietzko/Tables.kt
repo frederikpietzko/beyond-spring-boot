@@ -5,9 +5,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.dao.id.LongIdTable
 import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.javatime.timestampWithTimeZone
-import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 
 object PetTable : LongIdTable("pet") {
   val name = varchar("name", 255)
@@ -19,12 +17,6 @@ object VisitTable : LongIdTable("visit") {
   val description = text("description")
   val pet = reference("pet_id", PetTable)
   val dateTime = timestampWithTimeZone("date_time")
-}
-
-suspend fun initTables() = newSuspendedTransaction {
-  SchemaUtils.drop(PetTable, VisitTable, inBatch = true)
-  SchemaUtils.create(PetTable, VisitTable, inBatch = true)
-  commit()
 }
 
 object DbSettings {

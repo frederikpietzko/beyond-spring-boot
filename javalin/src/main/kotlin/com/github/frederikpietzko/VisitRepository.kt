@@ -2,11 +2,8 @@ package com.github.frederikpietzko
 
 import com.github.frederikpietzko.model.Pet
 import com.github.frederikpietzko.model.Visit
-import org.jetbrains.exposed.v1.core.JoinType
-import org.jetbrains.exposed.v1.core.ResultRow
-import org.jetbrains.exposed.v1.jdbc.insertAndGetId
-import org.jetbrains.exposed.v1.jdbc.selectAll
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.transaction
 
 object VisitRepository {
   fun getVisits() = transaction {
@@ -45,7 +42,7 @@ object VisitRepository {
     id = this[VisitTable.id].value,
     description = this[VisitTable.description],
     pet = Pet(
-      id = this[VisitTable.id].value,
+      id = this[PetTable.id].value,
       name = this[PetTable.name],
       age = this[PetTable.age],
       type = this[PetTable.type],

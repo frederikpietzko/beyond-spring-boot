@@ -3,11 +3,9 @@ package com.github.frederikpietzko
 import com.github.frederikpietzko.model.Type
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import org.jetbrains.exposed.v1.core.dao.id.LongIdTable
-import org.jetbrains.exposed.v1.javatime.timestampWithTimeZone
-import org.jetbrains.exposed.v1.jdbc.Database
-import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import org.jetbrains.exposed.v1.migration.MigrationUtils
+import org.jetbrains.exposed.dao.id.LongIdTable
+import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.javatime.timestampWithTimeZone
 
 object PetTable : LongIdTable("pet") {
   val name = varchar("name", 255)
@@ -21,22 +19,16 @@ object VisitTable : LongIdTable("visit") {
   val dateTime = timestampWithTimeZone("date_time")
 }
 
-private fun initTables() = transaction {
-  val migration = MigrationUtils.statementsRequiredForDatabaseMigration(
-    PetTable,
-    VisitTable,
-  )
-  migration.forEach { exec(it) }
-}
-
-
-fun setupDatabase() {
-  val config = HikariConfig().apply {
-    jdbcUrl = "jdbc:postgresql://localhost:6432/postgres"
-    username = "pg"
-    password = "pg"
+object DbSettings {
+  fun init(jdbcUrl: String, username: String, password: String) {
+    val config = HikariConfig().apply {
+      this.jdbcUrl = jdbcUrl
+      this.username = username
+      this.password = password
+      driverClassName = "org.postgresql.Driver"
+      maximumPoolSize = 10
+    }
+    val dataSource = HikariDataSource(config)
+    Database.connect(dataSource)
   }
-  val dataSource = HikariDataSource(config)
-  Database.connect(dataSource)
-  initTables()
 }
