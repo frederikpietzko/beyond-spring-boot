@@ -66,8 +66,7 @@ jobs:
         if: matrix.module == 'micronaut' || matrix.module == 'micronaut-jdbc'
         run: |
           ./gradlew :${{ matrix.module }}:dockerPush -x test \
-            -Dmicronaut.io.docker.image.repository=frederikpietzko/${{ matrix.module }} \
-            -Dmicronaut.io.docker.image.tag=${{ env.GIT_SHORT_HASH }}
+            -Dmicronaut.docker.imageName=frederikpietzko/${{ matrix.module }}:${{ env.GIT_SHORT_HASH }}
 
       - name: Build and Push Dockerfile-based Image
         if: >
