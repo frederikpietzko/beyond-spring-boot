@@ -4,6 +4,6 @@ server:
 db:
   source: "jdbc"
   connection:
-    url: "jdbc:postgresql://localhost:5432/postgres"
+    url: "jdbc:postgresql://localhost:6432/postgres"
     username: "pg"
     password: "pg"

@@ -6,7 +6,7 @@ javax:
         maximumPoolSize: 100
         minimumIdle: 20
         dataSource:
-          url: jdbc:postgresql://localhost:5432/postgres
+          url: jdbc:postgresql://localhost:6432/postgres
           user: pg
           password: pg
 hibernate:
