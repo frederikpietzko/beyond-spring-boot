@@ -1,6 +1,11 @@
 resource "azurerm_resource_group" "rg" {
   name     = var.resourceGroupName
   location = var.location
+
+  tags = {
+    managed_by  = "opentofu"
+    environment = "prod"
+  }
 }
 
 module "network" {

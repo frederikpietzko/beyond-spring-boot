@@ -16,11 +16,6 @@
 2. Select subscription:
     - `az account list -o table`
     - `az account set --subscription "<SUBSCRIPTION_ID>"`
-3. Export Terraform auth environment variables (do NOT commit these):
-    - `export ARM_CLIENT_ID="<APP_ID>"`
-    - `export ARM_CLIENT_SECRET="<PASSWORD>"`
-    - `export ARM_TENANT_ID="<TENANT_ID>"`
-    - `export ARM_SUBSCRIPTION_ID="<SUBSCRIPTION_ID>"`
 
 ## 2) Terraform: provision ephemeral infrastructure (local state)
 

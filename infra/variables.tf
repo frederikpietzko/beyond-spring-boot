@@ -7,5 +7,5 @@ variable "location" {
 variable "resourceGroupName" {
   type        = string
   description = "The name of the resource group."
-  default     = "beyond_spring_boot_loadtest_fpietzko"
+  default     = "rg-beyond-spring-boot"
 }

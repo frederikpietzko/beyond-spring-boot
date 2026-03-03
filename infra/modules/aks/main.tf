@@ -1,49 +1,89 @@
-module "aks" {
-  source              = "Azure/aks/azurerm"
-  version             = "~> 9.0"
-  prefix              = var.clusterName
-  cluster_name        = var.clusterName
-  resource_group_name = var.resourceGroupName
-  location            = var.location
-  vnet_subnet_id      = var.subnetId
+terraform {
+  required_providers {
+    azapi = {
+      source = "azure/azapi"
+    }
+  }
+}
 
-  # Default node pool (system)
-  agents_pool_name                  = "system"
-  agents_size                       = "Standard_D2s_v3"
-  agents_count                      = 1
-  identity_type                     = "SystemAssigned"
-  network_plugin                    = "azure"
-  load_balancer_sku                 = "standard"
-  log_analytics_workspace_enabled   = false
-  role_based_access_control_enabled = true
+data "azurerm_subscription" "current" {}
+
+resource "azapi_resource" "aks" {
+  type      = "Microsoft.ContainerService/managedClusters@2024-09-01"
+  name      = var.clusterName
+  location  = var.location
+  parent_id = "${data.azurerm_subscription.current.id}/resourceGroups/${var.resourceGroupName}"
+
+  schema_validation_enabled = false
+
+  body = {
+    identity = {
+      type = "SystemAssigned"
+    }
+    properties = {
+      dnsPrefix = var.clusterName
+      agentPoolProfiles = [
+        {
+          name         = "system"
+          count        = 1
+          vmSize       = "Standard_D2s_v6"
+          osType       = "Linux"
+          mode         = "System"
+          vnetSubnetID = var.subnetId
+          type         = "VirtualMachineScaleSets"
+        }
+      ]
+      networkProfile = {
+        networkPlugin   = "azure"
+        loadBalancerSku = "standard"
+        serviceCidr     = "172.16.0.0/16"
+        dnsServiceIP    = "172.16.0.10"
+      }
+      enableRBAC = true
+    }
+    tags = {
+      managed_by  = "opentofu"
+      environment = "prod"
+    }
+  }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "apps" {
   name                  = "apps"
-  kubernetes_cluster_id = module.aks.aks_id
-  vm_size               = "Standard_D8s_v5"
+  kubernetes_cluster_id = azapi_resource.aks.id
+  vm_size               = "Standard_D4s_v6"
   node_count            = 1
   vnet_subnet_id        = var.subnetId
 
   node_labels = {
     pool = "apps"
   }
+
+  tags = {
+    managed_by  = "opentofu"
+    environment = "prod"
+  }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "loadtest" {
   name                  = "loadtest"
-  kubernetes_cluster_id = module.aks.aks_id
-  vm_size               = "Standard_D8s_v5"
+  kubernetes_cluster_id = azapi_resource.aks.id
+  vm_size               = "Standard_D2s_v6"
   node_count            = 2
   vnet_subnet_id        = var.subnetId
 
   node_labels = {
     pool = "loadtest"
   }
+
+  tags = {
+    managed_by  = "opentofu"
+    environment = "prod"
+  }
 }
 
 output "clusterName" {
-  value = module.aks.aks_name
+  value = var.clusterName
 }
 
 output "resourceGroupName" {

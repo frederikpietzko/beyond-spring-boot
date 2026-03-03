@@ -74,6 +74,8 @@ infra: Contains terraform files to create the infrastructure in azure.
 # Target Architecture
 
 The benchmark infrastructure is designed to be ephemeral and consists of:
+all resources should be created using terraform in Europe West. Do not create resources in other regions.
+Check resource quotas in the subscription and adjust accordingly.
 
 - AKS cluster with a system pool, an `apps` pool, and a `loadtest` pool (Standard_D8s_v5)
 - Azure Database for PostgreSQL Flexible Server with private access in the VNet

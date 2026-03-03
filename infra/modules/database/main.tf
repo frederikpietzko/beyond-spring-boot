@@ -12,6 +12,15 @@ resource "azurerm_postgresql_flexible_server" "postgres" {
 
   storage_mb = 32768
   sku_name   = "GP_Standard_D2ds_v4"
+
+  lifecycle {
+    ignore_changes = [zone]
+  }
+
+  tags = {
+    managed_by  = "opentofu"
+    environment = "prod"
+  }
 }
 
 resource "azurerm_postgresql_flexible_server_database" "db" {
