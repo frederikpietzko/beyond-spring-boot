@@ -69,7 +69,8 @@ quarkus-jdbi: quarkus implementation, uses jdbi and jackson
 loadtest: Constains loadtest to run against port 8080 and k6 scripts for loadtests, runbook for testing in azure aks
 pgbouncer: pgbouncer configuration
 migration.sql: SQL file to create the database schema manually
-infra: Contains terraform files to create the infrastructure in azure.
+infra: Contains terraform files to create the infrastructure in azure. You can find terraform output in
+infra/.run/output.json
 
 # Target Architecture
 
