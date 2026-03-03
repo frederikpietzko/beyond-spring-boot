@@ -1,0 +1,25 @@
+# Terraform directory
+.terraform/
+
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+
+# Overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Log files
+terraform.log
+crash.log
+
+# Plan files
+*.tfplan
+plan.cache
+
+# Other
+.terraform.tfstate.lock.info

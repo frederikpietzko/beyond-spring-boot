@@ -14,6 +14,10 @@ Java 21 is used across the board. Some modules are implemented using Kotlin 2.2.
 Compare different frameworks and libraries using the same rest api.
 The idea is to do the "naive" implementation of the rest api and highlight the differences and similarities.
 
+- automate the provisioning of the benchmark environment in Azure using Terraform
+- isolate the load generator from the application by using dedicated AKS node pools
+- minimize network latency through private networking (VNet) between AKS and Postgres
+
 # Run a specific module
 
 - all modules can be run using gradle using the application plugin
@@ -23,6 +27,8 @@ The idea is to do the "naive" implementation of the rest api and highlight the d
 - do not introdise framework specific features that change api behaviour unless said otherwise
 - do not introduce new features
 - avoid benchmark optimizations
+- do not collect logs or traces (metrics-only pipeline)
+- no long-term persistence of the benchmark environment (ephemeral)
 
 # API Contract
 
@@ -60,6 +66,16 @@ micronaut: micronaut implementation, uses hibernate + jpa and micronaut serializ
 micronaut-jdbc: second micronaut implementation, uses jdbc with micronaut jdbc and micronaut serialization
 quarkus: quarkus implementation, uses panache and jackson
 quarkus-jdbi: quarkus implementation, uses jdbi and jackson
-loadtest: Constains loadtest to run against port 8080
+loadtest: Constains loadtest to run against port 8080 and k6 scripts for loadtests, runbook for testing in azure aks
 pgbouncer: pgbouncer configuration
-migration.sql: SQL file to create the database schema manually.
+migration.sql: SQL file to create the database schema manually
+infra: Contains terraform files to create the infrastructure in azure.
+
+# Target Architecture
+
+The benchmark infrastructure is designed to be ephemeral and consists of:
+
+- AKS cluster with a system pool, an `apps` pool, and a `loadtest` pool (Standard_D8s_v5)
+- Azure Database for PostgreSQL Flexible Server with private access in the VNet
+- Private DNS linkage for internal resolution
+- Metrics-only observability pipeline to Grafana Cloud
