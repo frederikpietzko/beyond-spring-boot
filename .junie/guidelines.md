@@ -1,5 +1,7 @@
 # Project Guidelines
 
+Interview me bofore you start making changes until you are sure you are on the right track.
+
 # Description
 
 This is a simple project comparing different frameworks and libraries.
