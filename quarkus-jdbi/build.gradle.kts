@@ -11,6 +11,7 @@ val quarkusPlatformVersion: String by project
 dependencies {
   implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
   implementation("io.quarkus:quarkus-container-image-jib")
+  implementation("io.quarkus:quarkus-micrometer-registry-prometheus")
   implementation("io.quarkus:quarkus-jdbc-postgresql")
   implementation("io.quarkus:quarkus-arc")
   implementation("io.quarkus:quarkus-hibernate-validator")
