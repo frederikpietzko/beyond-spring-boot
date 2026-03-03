@@ -15,6 +15,8 @@ dependencies {
   annotationProcessor("org.projectlombok:lombok:1.18.38")
   compileOnly("org.projectlombok:lombok:1.18.38")
   implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator")
+  implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
+  implementation("io.micronaut:micronaut-management")
   implementation("io.micronaut:micronaut-http-server-netty")
   implementation("io.micronaut.jaxrs:micronaut-jaxrs-server")
   implementation("io.micronaut.serde:micronaut-serde-jackson")
