@@ -1,17 +1,17 @@
 import http from 'k6/http';
-import {check, sleep} from 'k6';
+import {check} from 'k6';
 
 const BASE_URL = __ENV.BASE_URL || 'http://localhost:8080';
-const DURATION = __ENV.DURATION || '1m';
-const MAX_VUS = __ENV.MAX_VUS || '100';
+const DURATION = __ENV.DURATION || '10m';
+const MAX_VUS = __ENV.MAX_VUS || '10';
 const WARMUP_DURATION = __ENV.WARMUP_DURATION || '30s';
 
 export const options = {
     stages: [
-        {duration: WARMUP_DURATION, target: 10},
-        {duration: '1m', target: parseInt(MAX_VUS)},
+        {duration: WARMUP_DURATION, target: 5},
+        {duration: '5m', target: parseInt(MAX_VUS)},
         {duration: DURATION, target: parseInt(MAX_VUS)},
-        {duration: '30s', target: 0},
+        {duration: '1m', target: 0},
     ],
     thresholds: {
         http_req_failed: ['rate<0.01'],
@@ -32,6 +32,4 @@ export default function () {
         'get single visit status is 200': (r) => r.status === 200,
         'get single visit has correct id': (r) => r.json() && r.json().id === visitId,
     });
-
-    sleep(1);
 }
