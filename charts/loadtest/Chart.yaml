@@ -1,0 +1,7 @@
+apiVersion: v2
+name: loadtest
+version: 0.1.0
+dependencies:
+  - name: k6-operator
+    version: 4.3.0
+    repository: https://grafana.github.io/helm-charts

@@ -1,0 +1,56 @@
+alloy:
+  alloy:
+    configMap:
+      create: true
+      content: |-
+        logging {
+          level  = "info"
+          format = "logfmt"
+        }
+
+        prometheus.remote_write "grafana_cloud" {
+          endpoint {
+            url = sys.env("GRAFANA_CLOUD_URL")
+            basic_auth {
+              username = sys.env("GRAFANA_CLOUD_USER")
+              password = sys.env("GRAFANA_CLOUD_TOKEN")
+            }
+          }
+        }
+
+        discovery.kubernetes "apps" {
+          role = "pod"
+          namespaces {
+            names = ["apps"]
+          }
+        }
+
+        prometheus.scrape "apps" {
+          targets = discovery.kubernetes.apps.targets
+          forward_to = [prometheus.remote_write.grafana_cloud.receiver]
+          job_name = "apps"
+          scrape_interval = "15s"
+        }
+
+    extraEnv:
+      - name: GRAFANA_CLOUD_URL
+        valueFrom:
+          secretKeyRef:
+            name: grafana-token
+            key: endpoint
+      - name: GRAFANA_CLOUD_USER
+        valueFrom:
+          secretKeyRef:
+            name: grafana-token
+            key: username
+      - name: GRAFANA_CLOUD_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: grafana-token
+            key: token
+
+  controller:
+    type: daemonset
+
+  serviceAccount:
+    create: true

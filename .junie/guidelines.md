@@ -82,3 +82,9 @@ Check resource quotas in the subscription and adjust accordingly.
 - Azure Database for PostgreSQL Flexible Server with private access in the VNet
 - Private DNS linkage for internal resolution
 - Metrics-only observability pipeline to Grafana Cloud
+
+# Kubernetes infos
+
+- AKS cluster is present and connected to
+- AKS cluster has 2 nodepools, loadtest for the k6 runners, apps for the application that is being tested
+- Secrets for grafana are created. k6-api-token in loadtest namespace, graphana-token in observability namespace

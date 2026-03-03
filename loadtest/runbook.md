@@ -53,7 +53,7 @@ Keep Terraform outputs handy:
 ## 5) Install k6-operator (Helm) and k6 Cloud token
 
 1. Install k6-operator into `loadtest` namespace (Helm)
-2. Create a Kubernetes Secret in `loadtest` containing your k6 Cloud token
+2. Create a Kubernetes Secret in `loadtest` containing your k6 Cloud token called k6-api-token with a key of `token`
 
 ## 6) Install metrics-only pipeline to Grafana Cloud (no logs, no traces)
 

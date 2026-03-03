@@ -1,0 +1,6 @@
+k6-operator:
+  namespace:
+    create: true
+  nodeSelector:
+    pool: loadtest
+  # Runners configuration should be added here later in a template
