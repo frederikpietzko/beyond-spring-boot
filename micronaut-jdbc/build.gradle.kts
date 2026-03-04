@@ -24,6 +24,8 @@ dependencies {
   implementation("io.micronaut.data:micronaut-data-jdbc")
   implementation("io.micronaut.sql:micronaut-jdbc-hikari")
   runtimeOnly("org.postgresql:postgresql")
+  implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
+  implementation("io.micronaut:micronaut-management")
   testImplementation("io.micronaut:micronaut-http-client")
 }
 
