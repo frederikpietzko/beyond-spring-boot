@@ -18,6 +18,7 @@ dependencies {
   implementation("io.quarkus:quarkus-hibernate-validator")
   implementation("io.quarkus:quarkus-rest")
   implementation("io.quarkus:quarkus-rest-jackson")
+  implementation("io.quarkus:quarkus-micrometer-registry-prometheus")
   compileOnly("org.projectlombok:lombok:1.18.38")
   annotationProcessor("org.projectlombok:lombok:1.18.38")
   testImplementation("io.quarkus:quarkus-junit5")
