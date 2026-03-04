@@ -12,3 +12,5 @@ javax:
 hibernate:
   hbm2ddl:
     auto: update
+metrics:
+  app-name: helidon-mp

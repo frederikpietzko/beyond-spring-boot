@@ -46,7 +46,7 @@ resource "azurerm_linux_virtual_machine" "jumphost" {
   name                = "vm-jumphost"
   resource_group_name = var.resourceGroupName
   location            = var.location
-  size                = "Standard_B1s"
+  size                = "Standard_D2s_v3"
   admin_username      = "azureuser"
   network_interface_ids = [
     azurerm_network_interface.jumphost.id,
