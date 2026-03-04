@@ -11,8 +11,24 @@ import io.javalin.apibuilder.ApiBuilder.get
 import io.javalin.apibuilder.ApiBuilder.post
 import io.javalin.http.bodyAsClass
 import io.javalin.json.JavalinJackson
+import io.micrometer.core.instrument.binder.jvm.ClassLoaderMetrics
+import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics
+import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics
+import io.micrometer.core.instrument.binder.jvm.JvmThreadMetrics
+import io.micrometer.core.instrument.binder.system.ProcessorMetrics
+import io.micrometer.prometheusmetrics.PrometheusConfig
+import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
 
 fun main() {
+  val prometheusRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT).apply {
+    config().commonTags("application", "javalin")
+    ClassLoaderMetrics().bindTo(this)
+    JvmMemoryMetrics().bindTo(this)
+    JvmGcMetrics().bindTo(this)
+    ProcessorMetrics().bindTo(this)
+    JvmThreadMetrics().bindTo(this)
+  }
+
   val yamlMapper = ObjectMapper(YAMLFactory()).registerKotlinModule()
   val configStream = Thread.currentThread().contextClassLoader.getResourceAsStream("application.yaml")
   val appConfig = yamlMapper.readTree(configStream)
@@ -22,6 +38,7 @@ fun main() {
     jdbcUrl = dbConfig.get("jdbcUrl").asText(),
     username = dbConfig.get("username").asText(),
     password = dbConfig.get("password").asText(),
+    prometheusRegistry = prometheusRegistry,
   )
 
   val objectMapper = ObjectMapper().registerKotlinModule()
@@ -50,6 +67,10 @@ fun main() {
         VisitRepository.save(req.toModel())
           .toDto()
           .let { ctx.json(it) }
+      }
+
+      get("/metrics") { ctx ->
+        ctx.contentType("text/plain").result(prometheusRegistry.scrape())
       }
     }
   }.start(8080)

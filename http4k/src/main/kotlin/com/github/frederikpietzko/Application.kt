@@ -6,6 +6,13 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.github.frederikpietzko.dto.CreateVisitDto
 import com.github.frederikpietzko.dto.VisitDto
 import com.github.frederikpietzko.dto.toDto
+import io.micrometer.core.instrument.binder.jvm.ClassLoaderMetrics
+import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics
+import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics
+import io.micrometer.core.instrument.binder.jvm.JvmThreadMetrics
+import io.micrometer.core.instrument.binder.system.ProcessorMetrics
+import io.micrometer.prometheusmetrics.PrometheusConfig
+import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
 import org.http4k.core.Body
 import org.http4k.core.HttpHandler
 import org.http4k.core.Method.GET
@@ -22,6 +29,15 @@ import org.http4k.server.Helidon
 import org.http4k.server.asServer
 
 fun main() {
+  val prometheusRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT).apply {
+    config().commonTags("application", "http4k")
+    ClassLoaderMetrics().bindTo(this)
+    JvmMemoryMetrics().bindTo(this)
+    JvmGcMetrics().bindTo(this)
+    ProcessorMetrics().bindTo(this)
+    JvmThreadMetrics().bindTo(this)
+  }
+
   val yamlMapper = ObjectMapper(YAMLFactory()).registerKotlinModule()
   val configStream = Thread.currentThread().contextClassLoader.getResourceAsStream("application.yaml")
   val appConfig = yamlMapper.readTree(configStream)
@@ -31,6 +47,7 @@ fun main() {
     jdbcUrl = dbConfig.get("jdbcUrl").asText(),
     username = dbConfig.get("username").asText(),
     password = dbConfig.get("password").asText(),
+    prometheusRegistry = prometheusRegistry,
   )
 
   val visitDtoListLens = Body.auto<List<VisitDto>>().toLens()
@@ -64,6 +81,9 @@ fun main() {
       } else {
         Response(OK).with(visitDtoLens of visit)
       }
+    },
+    "/metrics" bind GET to {
+      Response(OK).body(prometheusRegistry.scrape())
     },
   )
 

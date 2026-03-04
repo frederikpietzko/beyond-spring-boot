@@ -47,4 +47,5 @@ dependencies {
   runtimeOnly("org.postgresql:postgresql:42.7.7")
   implementation("ch.qos.logback:logback-classic:1.5.18")
   implementation("com.zaxxer:HikariCP:7.0.2")
+  implementation("io.micrometer:micrometer-registry-prometheus:1.16.3")
 }
