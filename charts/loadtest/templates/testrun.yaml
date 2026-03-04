@@ -7,6 +7,7 @@ metadata:
   name: {{ include "loadtest.fullname" $ }}-{{ $name }}
   namespace: {{ $.Values.k6.namespace }}
 spec:
+  token: k6-api-token
   parallelism: {{ $test.parallelism | default 1 }}
   script:
     configMap:
@@ -25,8 +26,6 @@ spec:
       - name: {{ $key }}
         value: {{ $val | quote }}
       {{- end }}
-    arguments:
-      - "--out"
-      - "cloud"
+  arguments: --out cloud
 {{- end }}
 {{- end }}
