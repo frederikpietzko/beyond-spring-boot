@@ -22,3 +22,6 @@ CREATE TABLE visit
 -- Create indexes for better query performance
 CREATE INDEX idx_visit_pet_id ON visit (pet_id);
 CREATE INDEX idx_visit_date_time ON visit (date_time);
+
+alter sequence visit_seq increment by 50;
+alter sequence pet_seq increment by 50;
