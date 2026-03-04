@@ -12,7 +12,10 @@ java {
 dependencies {
   implementation(enforcedPlatform("io.helidon:helidon-dependencies:$helidonVersion"))
   implementation("io.helidon.webserver:helidon-webserver")
+  implementation("io.helidon.webserver.observe:helidon-webserver-observe-metrics")
+  implementation("io.helidon.metrics:helidon-metrics-prometheus")
   implementation("io.helidon.http.media:helidon-http-media-jackson")
+  implementation("io.helidon.dbclient:helidon-dbclient-metrics")
 
   annotationProcessor("org.projectlombok:lombok:1.18.38")
   compileOnly("org.projectlombok:lombok:1.18.38")

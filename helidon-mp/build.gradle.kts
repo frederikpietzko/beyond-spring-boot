@@ -18,6 +18,7 @@ hibernate {
 dependencies {
   implementation(enforcedPlatform("io.helidon:helidon-dependencies:$helidonVersion"))
   implementation("io.helidon.microprofile.bundles:helidon-microprofile")
+  implementation("io.helidon.microprofile.metrics:helidon-microprofile-metrics")
   implementation("org.glassfish.jersey.media:jersey-media-json-binding")
   implementation("org.slf4j:slf4j-api")
   implementation("io.helidon.logging:helidon-logging-slf4j")

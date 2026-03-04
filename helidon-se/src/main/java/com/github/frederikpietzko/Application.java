@@ -16,6 +16,8 @@ import io.helidon.http.media.jackson.JacksonSupport;
 import io.helidon.logging.common.LogConfig;
 import io.helidon.webserver.WebServer;
 import io.helidon.webserver.http.HttpRouting;
+import io.helidon.webserver.observe.ObserveFeature;
+import io.helidon.webserver.observe.metrics.MetricsObserver;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
@@ -34,6 +36,10 @@ public class Application {
 
     final var server = WebServer.builder()
       .config(global.get("server"))
+      .addFeature(ObserveFeature.builder()
+        .config(global.get("server.features.observe"))
+        .addObserver(MetricsObserver.create())
+        .build())
       .mediaContext(it ->
         it.mediaSupportsDiscoverServices(false)
           .addMediaSupport(JacksonSupport.create(createObjectMapper()))
