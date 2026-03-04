@@ -32,7 +32,7 @@ securityContext: { }
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
+# runAsNonRoot: true
 # runAsUser: 1000
 
 service:
@@ -60,7 +60,7 @@ database:
   passwordKey: DB_PASSWORD
 
 nodeSelector:
-  agentpool: apps
+  pool: apps
 
 tolerations: [ ]
 
