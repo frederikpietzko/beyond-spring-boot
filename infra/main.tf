@@ -40,3 +40,11 @@ module "aks" {
   subnetId          = module.network.subnetAksId
   depends_on        = [azurerm_resource_group.rg]
 }
+
+module "jumphost" {
+  source            = "./modules/jumphost"
+  resourceGroupName = azurerm_resource_group.rg.name
+  location          = azurerm_resource_group.rg.location
+  subnetId          = module.network.subnetJumphostId
+  sshPublicKey      = var.sshPublicKey
+}

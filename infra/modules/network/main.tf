@@ -27,6 +27,13 @@ resource "azurerm_subnet" "subnetPostgres" {
   }
 }
 
+resource "azurerm_subnet" "subnetJumphost" {
+  name                 = var.subnetJumphostName
+  resource_group_name  = var.resourceGroupName
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = var.subnetJumphostPrefix
+}
+
 resource "azurerm_private_dns_zone" "dnsZonePostgres" {
   name                = var.postgresDnsZoneName
   resource_group_name = var.resourceGroupName
@@ -57,4 +64,8 @@ output "dnsZoneId" {
 
 output "dnsZoneName" {
   value = azurerm_private_dns_zone.dnsZonePostgres.name
+}
+
+output "subnetJumphostId" {
+  value = azurerm_subnet.subnetJumphost.id
 }

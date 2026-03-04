@@ -26,3 +26,7 @@ output "postgresDatabase" {
 output "aksConnectCommand" {
   value = "az aks get-credentials --resource-group ${azurerm_resource_group.rg.name} --name ${module.aks.clusterName} --overwrite-existing"
 }
+
+output "jumphostPublicIp" {
+  value = module.jumphost.publicIp
+}

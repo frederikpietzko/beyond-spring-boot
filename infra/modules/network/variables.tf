@@ -35,6 +35,16 @@ variable "subnetPostgresPrefix" {
   default = ["10.0.2.0/24"]
 }
 
+variable "subnetJumphostName" {
+  type    = string
+  default = "subnetJumphost"
+}
+
+variable "subnetJumphostPrefix" {
+  type    = list(string)
+  default = ["10.0.3.0/24"]
+}
+
 variable "postgresDnsZoneName" {
   type    = string
   default = "beyond-spring-boot.postgres.database.azure.com"
