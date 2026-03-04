@@ -1,6 +1,43 @@
-k6-operator:
-  namespace:
-    create: true
+# Global k6 settings
+k6:
+  namespace: loadtest
   nodeSelector:
     pool: loadtest
-  # Runners configuration should be added here later in a template
+
+# Subchart configuration
+# k6-operator is a dependency, check its values for exact configuration
+k6-operator:
+  nodeSelector:
+    pool: loadtest
+
+# Loadtest definitions
+loadtests:
+  get-all-visits:
+    enabled: false
+    script: "loadtest-get-all-visits.js"
+    parallelism: 1
+    env:
+      BASE_URL: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
+      DURATION: "10m"
+      MAX_VUS: "10"
+      WARMUP_DURATION: "30s"
+
+  get-visit:
+    enabled: false
+    script: "loadtest-get-visit.js"
+    parallelism: 1
+    env:
+      BASE_URL: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
+      DURATION: "10m"
+      MAX_VUS: "10"
+      WARMUP_DURATION: "30s"
+
+  create-visit:
+    enabled: false
+    script: "loadtest-create-visit.js"
+    parallelism: 1
+    env:
+      BASE_URL: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
+      DURATION: "10m"
+      MAX_VUS: "10"
+      WARMUP_DURATION: "30s"

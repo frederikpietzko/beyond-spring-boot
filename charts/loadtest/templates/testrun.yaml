@@ -1,0 +1,24 @@
+{{- range $name, $test := .Values.loadtests }}
+{{- if $test.enabled }}
+---
+apiVersion: k6.io/v1alpha1
+kind: TestRun
+metadata:
+  name: {{ include "loadtest.fullname" $ }}-{{ $name }}
+  namespace: {{ $.Values.k6.namespace }}
+spec:
+  parallelism: {{ $test.parallelism | default 1 }}
+  script:
+    configMap:
+      name: {{ $.Release.Name }}-scripts
+      file: {{ $test.script }}
+  runner:
+    nodeSelector:
+      pool: {{ $.Values.k6.nodeSelector.pool }}
+    env:
+      {{- range $key, $val := $test.env }}
+      - name: {{ $key }}
+        value: {{ $val | quote }}
+      {{- end }}
+{{- end }}
+{{- end }}
