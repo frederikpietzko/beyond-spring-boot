@@ -12,9 +12,9 @@ fun Application.setupSerialization() {
 }
 
 suspend fun Application.setupDatabase() {
-  val jdbcUrl = environment.config.property("db.jdbcUrl").getString()
-  val username = environment.config.property("db.username").getString()
-  val password = environment.config.property("db.password").getString()
+  val jdbcUrl = System.getenv("JDBC_URL") ?: environment.config.property("db.jdbcUrl").getString()
+  val username = System.getenv("DB_USERNAME") ?: environment.config.property("db.username").getString()
+  val password = System.getenv("DB_PASSWORD") ?: environment.config.property("db.password").getString()
 
   DbSettings.init(jdbcUrl, username, password, appMicrometerRegistry)
 }

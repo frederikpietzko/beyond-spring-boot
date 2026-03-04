@@ -6,9 +6,9 @@ javax:
         maximumPoolSize: 100
         minimumIdle: 20
         dataSource:
-          url: jdbc:postgresql://localhost:6432/postgres
-          user: pg
-          password: pg
+          url: "${JDBC_URL:jdbc:postgresql://localhost:6432/postgres}"
+          user: "${DB_USERNAME:pg}"
+          password: "${DB_PASSWORD:pg}"
 hibernate:
   hbm2ddl:
     auto: update

@@ -7,6 +7,6 @@ server:
 db:
   source: "jdbc"
   connection:
-    url: "jdbc:postgresql://localhost:6432/postgres"
-    username: "pg"
-    password: "pg"
+    url: "${JDBC_URL:jdbc:postgresql://localhost:6432/postgres}"
+    username: "${DB_USERNAME:pg}"
+    password: "${DB_PASSWORD:pg}"

@@ -35,9 +35,9 @@ fun main() {
   val dbConfig = appConfig.get("db")
 
   DbSettings.init(
-    jdbcUrl = dbConfig.get("jdbcUrl").asText(),
-    username = dbConfig.get("username").asText(),
-    password = dbConfig.get("password").asText(),
+    jdbcUrl = System.getenv("JDBC_URL") ?: dbConfig.get("jdbcUrl").asText(),
+    username = System.getenv("DB_USERNAME") ?: dbConfig.get("username").asText(),
+    password = System.getenv("DB_PASSWORD") ?: dbConfig.get("password").asText(),
     prometheusRegistry = prometheusRegistry,
   )
 
