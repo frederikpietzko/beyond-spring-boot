@@ -3,6 +3,7 @@ package com.github.frederikpietzko
 import com.github.frederikpietzko.model.Type
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
 import org.jetbrains.exposed.dao.id.LongIdTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.javatime.timestampWithTimeZone
@@ -20,13 +21,14 @@ object VisitTable : LongIdTable("visit") {
 }
 
 object DbSettings {
-  fun init(jdbcUrl: String, username: String, password: String) {
+  fun init(jdbcUrl: String, username: String, password: String, registry: PrometheusMeterRegistry) {
     val config = HikariConfig().apply {
       this.jdbcUrl = jdbcUrl
       this.username = username
       this.password = password
       driverClassName = "org.postgresql.Driver"
       maximumPoolSize = 10
+      metricRegistry = registry
     }
     val dataSource = HikariDataSource(config)
     Database.connect(dataSource)

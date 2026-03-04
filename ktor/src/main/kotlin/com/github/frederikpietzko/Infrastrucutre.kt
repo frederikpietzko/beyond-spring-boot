@@ -16,5 +16,5 @@ suspend fun Application.setupDatabase() {
   val username = environment.config.property("db.username").getString()
   val password = environment.config.property("db.password").getString()
 
-  DbSettings.init(jdbcUrl, username, password)
+  DbSettings.init(jdbcUrl, username, password, appMicrometerRegistry)
 }

@@ -53,6 +53,8 @@ dependencies {
   implementation("io.ktor:ktor-server-config-yaml:$ktor_version")
   implementation("io.ktor:ktor-server-content-negotiation:${ktor_version}")
   implementation("io.ktor:ktor-serialization-kotlinx-json:${ktor_version}")
+  implementation("io.ktor:ktor-server-metrics-micrometer:$ktor_version")
+  implementation("io.micrometer:micrometer-registry-prometheus:1.16.3")
 
   implementation("ch.qos.logback:logback-classic:1.5.18")
   implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
