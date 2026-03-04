@@ -40,4 +40,4 @@ nb-configuration.xml
 /.quarkus/cli/plugins/
 # TLS Certificates
 .certs/
-charts/
+charts/**/charts
