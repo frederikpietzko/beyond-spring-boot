@@ -33,11 +33,11 @@ loadtests:
       WARMUP_DURATION: "30s"
 
   create-visit:
-    enabled: false
+    enabled: true
     script: "loadtest-create-visit.js"
     parallelism: 1
     env:
       BASE_URL: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
-      DURATION: "10m"
-      MAX_VUS: "10"
+      DURATION: "1m"
+      MAX_VUS: "2"
       WARMUP_DURATION: "30s"

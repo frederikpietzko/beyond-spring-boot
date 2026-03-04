@@ -16,9 +16,17 @@ spec:
     nodeSelector:
       pool: {{ $.Values.k6.nodeSelector.pool }}
     env:
+      - name: K6_CLOUD_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: k6-api-token
+            key: token
       {{- range $key, $val := $test.env }}
       - name: {{ $key }}
         value: {{ $val | quote }}
       {{- end }}
+    arguments:
+      - "--out"
+      - "cloud"
 {{- end }}
 {{- end }}
