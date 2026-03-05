@@ -1,3 +1,7 @@
 image:
   repository: frederikpietzko/helidon-se
   tag: latest
+
+extraEnv:
+  - name: DB_CONNECTION_MAXIMUM_POOL_SIZE
+    value: "100"

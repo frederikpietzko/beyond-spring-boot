@@ -44,6 +44,9 @@ fun main() {
   val objectMapper = ObjectMapper().registerKotlinModule()
     .registerModule(JavaTimeModule())
   Javalin.create { config ->
+    config.jetty.threadPool = org.eclipse.jetty.util.thread.QueuedThreadPool().apply {
+      virtualThreadsExecutor = java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()
+    }
     config.jsonMapper(JavalinJackson(objectMapper))
     config.router.apiBuilder {
       get("/visits") { ctx ->

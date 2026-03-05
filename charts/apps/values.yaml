@@ -29,7 +29,7 @@ podSecurityContext: { }
 
 securityContext: { }
   # capabilities:
-  #   drop:
+#   drop:
 #   - ALL
 # readOnlyRootFilesystem: true
 # runAsNonRoot: true
@@ -51,7 +51,7 @@ resources:
 jvm:
   # JAVA_TOOL_OPTIONS is used for JVM settings
   # Default heap 4GB as requested
-  javaToolOptions: "-Xmx4g"
+  javaToolOptions: "-Xmx4g -XX:MaxMetaspaceSize=256M -XX:MaxDirectMemorySize=256M"
 
 database:
   secretName: pg-credentials

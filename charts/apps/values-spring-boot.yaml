@@ -1,3 +1,9 @@
 image:
   repository: frederikpietzko/spring-boot
   tag: aa6ba56
+
+extraEnv:
+  - name: SPRING_THREADS_VIRTUAL_ENABLED
+    value: "true"
+  - name: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
+    value: "100"

@@ -46,10 +46,10 @@ public class VisitController {
 
   private VisitDto toDto(VisitRepository.VisitProjection p) {
     return new VisitDto(
-      p.getId(),
-      p.getDescription(),
-      new PetDto(p.getPetId(), p.getPetName(), p.getPetAge(), p.getPetType()),
-      p.getDateTime()
+      p.visit_id(),
+      p.description(),
+      new PetDto(p.pet_id(), p.pet_name(), p.pet_age(), p.pet_type()),
+      p.date_time()
     );
   }
 }

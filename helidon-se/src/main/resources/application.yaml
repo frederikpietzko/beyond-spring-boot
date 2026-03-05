@@ -10,5 +10,6 @@ db:
     url: "${JDBC_URL:jdbc:postgresql://localhost:6432/postgres}"
     username: "${DB_USERNAME:pg}"
     password: "${DB_PASSWORD:pg}"
+    maximumPoolSize: 100
 metrics:
   app-name: helidon-se

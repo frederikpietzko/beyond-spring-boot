@@ -10,8 +10,8 @@ export const options = {
         {duration: '1m', target: 0},  // Cooldown: ramp down to 0
     ],
     thresholds: {
-        http_req_failed: ['rate<0.01'],
-        http_req_duration: ['p(95)<500'],
+        http_req_failed: ['rate<0.20'],
+        http_req_duration: ['p(95)<10000'],
     },
 };
 

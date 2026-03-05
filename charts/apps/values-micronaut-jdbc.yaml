@@ -1,3 +1,9 @@
 image:
   repository: frederikpietzko/micronaut-jdbc
   tag: latest
+
+extraEnv:
+  - name: DATASOURCES_DEFAULT_MAXIMUM_POOL_SIZE
+    value: "100"
+  - name: MICRONAUT_SERVER_THREAD_SELECTION
+    value: "VIRTUAL"

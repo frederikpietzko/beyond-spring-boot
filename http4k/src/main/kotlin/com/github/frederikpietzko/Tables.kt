@@ -29,7 +29,7 @@ object DbSettings {
       this.username = username
       this.password = password
       driverClassName = "org.postgresql.Driver"
-      maximumPoolSize = 10
+      maximumPoolSize = System.getenv("HIKARI_MAX_POOL_SIZE")?.toInt() ?: 100
       metricRegistry = prometheusRegistry
     }
     val dataSource = HikariDataSource(config)

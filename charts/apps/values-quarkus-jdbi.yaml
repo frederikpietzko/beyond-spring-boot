@@ -1,3 +1,9 @@
 image:
   repository: frederikpietzko/quarkus-jdbi
   tag: latest
+
+extraEnv:
+  - name: QUARKUS_DATASOURCE_JDBC_MAX_SIZE
+    value: "100"
+  - name: QUARKUS_THREAD_POOL_EXECUTOR_VIRTUAL_THREADS_ENABLED
+    value: "true"

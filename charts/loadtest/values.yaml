@@ -13,11 +13,12 @@ k6-operator:
 # Loadtest definitions
 loadtests:
   get-all-visits:
-    enabled: false
+    enabled: true
     script: "loadtest-get-all-visits.js"
     parallelism: 5
     env:
       BASE_URL: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
+      PARALLELISM: "5"
 
   get-visit:
     enabled: false
@@ -25,10 +26,12 @@ loadtests:
     parallelism: 5
     env:
       BASE_URL: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
+      PARALLELISM: "5"
 
   create-visit:
-    enabled: true
+    enabled: false
     script: "loadtest-create-visit.js"
     parallelism: 5
     env:
       BASE_URL: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
+      PARALLELISM: "5"

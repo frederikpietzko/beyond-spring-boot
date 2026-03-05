@@ -3,7 +3,6 @@ package com.github.frederikpietzko;
 import com.github.frederikpietzko.model.Type;
 import com.github.frederikpietzko.model.VisitEntity;
 import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.repository.CrudRepository;
 
 import java.time.OffsetDateTime;
@@ -27,26 +26,14 @@ public interface VisitRepository extends CrudRepository<VisitEntity, Long> {
     """)
   Optional<VisitProjection> findByIdWithPet(Long id);
 
-  interface VisitProjection {
-    @Column("visit_id")
-    Long getId();
-
-    @Column("description")
-    String getDescription();
-
-    @Column("date_time")
-    OffsetDateTime getDateTime();
-
-    @Column("pet_id")
-    Long getPetId();
-
-    @Column("pet_name")
-    String getPetName();
-
-    @Column("pet_age")
-    int getPetAge();
-
-    @Column("pet_type")
-    Type getPetType();
+  record VisitProjection(
+    Long visit_id,
+    String description,
+    OffsetDateTime date_time,
+    Long pet_id,
+    String pet_name,
+    int pet_age,
+    Type pet_type
+  ) {
   }
 }
