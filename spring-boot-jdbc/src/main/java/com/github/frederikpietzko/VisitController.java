@@ -15,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VisitController {
   private final VisitRepository visitRepository;
+  private final PetRepository petRepository;
 
   @GetMapping
   public ResponseEntity<List<VisitDto>> getVisits() {
@@ -33,8 +34,10 @@ public class VisitController {
   }
 
   @PostMapping
-  public ResponseEntity<?> createVisit(@RequestBody @Valid CreateVisitDto visit) {
-    var entity = visitRepository.save(visit.toVisitEntity());
+  public ResponseEntity<?> createVisit(@RequestBody @Valid CreateVisitDto visitDto) {
+    final var visit = visitDto.toVisitEntity();
+    visit.pet = petRepository.save(visit.pet);
+    final var entity = visitRepository.save(visit);
     return ResponseEntity.ok(VisitDto.fromEntity(entity));
   }
 }
