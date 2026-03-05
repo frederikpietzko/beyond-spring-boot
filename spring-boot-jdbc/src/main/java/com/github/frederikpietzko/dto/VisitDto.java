@@ -1,5 +1,6 @@
 package com.github.frederikpietzko.dto;
 
+import com.github.frederikpietzko.model.PetEntity;
 import com.github.frederikpietzko.model.VisitEntity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -13,11 +14,11 @@ public record VisitDto(
   @NotNull OffsetDateTime dateTime
 ) {
 
-  public static VisitDto fromEntity(VisitEntity entity) {
+  public static VisitDto fromEntity(VisitEntity entity, PetEntity pet) {
     return new VisitDto(
       entity.id,
       entity.description,
-      PetDto.fromEntity(entity.pet),
+      PetDto.fromEntity(pet),
       entity.dateTime
     );
   }
