@@ -5,6 +5,7 @@ import com.github.frederikpietzko.dto.VisitDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class VisitController {
   }
 
   @PostMapping
+  @Transactional
   public ResponseEntity<?> createVisit(@RequestBody @Valid CreateVisitDto visitDto) {
     final var visit = visitDto.toVisitEntity();
     visit.pet = petRepository.save(visit.pet);
