@@ -15,29 +15,20 @@ loadtests:
   get-all-visits:
     enabled: false
     script: "loadtest-get-all-visits.js"
-    parallelism: 1
+    parallelism: 5
     env:
       BASE_URL: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
-      DURATION: "10m"
-      MAX_VUS: "10"
-      WARMUP_DURATION: "30s"
 
   get-visit:
     enabled: false
     script: "loadtest-get-visit.js"
-    parallelism: 1
+    parallelism: 5
     env:
       BASE_URL: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
-      DURATION: "10m"
-      MAX_VUS: "10"
-      WARMUP_DURATION: "30s"
 
   create-visit:
     enabled: true
     script: "loadtest-create-visit.js"
-    parallelism: 1
+    parallelism: 5
     env:
       BASE_URL: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
-      DURATION: "1m"
-      MAX_VUS: "2"
-      WARMUP_DURATION: "30s"
