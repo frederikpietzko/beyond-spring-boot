@@ -15,11 +15,11 @@ public record VisitDto(
   @NotNull OffsetDateTime dateTime
 ) {
 
-  public static VisitDto fromEntity(VisitEntity entity) {
+  public static VisitDto fromEntity(VisitEntity entity, PetDto petDto) {
     return new VisitDto(
       entity.id,
       entity.description,
-      PetDto.fromEntity(entity.pet),
+      petDto,
       entity.dateTime
     );
   }

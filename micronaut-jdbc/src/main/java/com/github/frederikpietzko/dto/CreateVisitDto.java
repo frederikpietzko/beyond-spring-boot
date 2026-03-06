@@ -15,6 +15,6 @@ public record CreateVisitDto(
 ) {
 
   public VisitEntity toVisitEntity() {
-    return new VisitEntity(null, description, pet.toEntity(), dateTime);
+    return new VisitEntity(description, null, dateTime);
   }
 }

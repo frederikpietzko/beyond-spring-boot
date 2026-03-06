@@ -1,7 +1,10 @@
 package com.github.frederikpietzko;
 
 import com.github.frederikpietzko.dto.CreateVisitDto;
+import com.github.frederikpietzko.dto.PetDto;
 import com.github.frederikpietzko.dto.VisitDto;
+import com.github.frederikpietzko.model.VisitEntity;
+import com.github.frederikpietzko.repository.PetRepository;
 import com.github.frederikpietzko.repository.VisitRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Min;
@@ -17,12 +20,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VisitResource {
   private final VisitRepository visitRepository;
+  private final PetRepository petRepository;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public List<VisitDto> getVisits() {
     return visitRepository
-      .findAll().stream().map(VisitDto::fromEntity)
+      .findAllWithPet().stream()
+      .map(VisitRepository.VisitProjection::toDto)
       .toList();
   }
 
@@ -31,18 +36,19 @@ public class VisitResource {
   @Produces(MediaType.APPLICATION_JSON)
   public VisitDto getVisit(@NotNull @Min(1) Long id) {
     return visitRepository
-      .findById(id)
-      .map(VisitDto::fromEntity)
+      .findByIdWithPet(id)
+      .map(VisitRepository.VisitProjection::toDto)
       .orElseThrow(() -> new NotFoundException("Visit not found"));
   }
 
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public VisitDto createVisit(CreateVisitDto visit) {
-    final var newVisit = visit.toVisitEntity();
-    visitRepository.save(newVisit);
-    return VisitDto.fromEntity(newVisit);
+  public VisitDto createVisit(CreateVisitDto visitDto) {
+    final var pet = petRepository.save(visitDto.pet().toEntity());
+    final var visit = new VisitEntity(visitDto.description(), pet.getId(), visitDto.dateTime());
+    final var entity = visitRepository.save(visit);
+    return VisitDto.fromEntity(entity, PetDto.fromEntity(pet));
   }
 }
 
