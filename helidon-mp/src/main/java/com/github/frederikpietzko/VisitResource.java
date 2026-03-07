@@ -3,14 +3,12 @@ package com.github.frederikpietzko;
 import com.github.frederikpietzko.dto.CreateVisitDto;
 import com.github.frederikpietzko.dto.VisitDto;
 import com.github.frederikpietzko.model.VisitEntity;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -39,7 +37,7 @@ public class VisitResource {
   @GET
   @Path("/{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  public VisitDto getVisit(@NotNull @Min(1) Long id) {
+  public VisitDto getVisit(@PathParam("id") @NotNull @Min(1) Long id) {
     final VisitEntity visit = visitRepository
       .findById(id);
 
