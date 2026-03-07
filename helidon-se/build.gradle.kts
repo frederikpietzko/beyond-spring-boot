@@ -31,6 +31,7 @@ dependencies {
   implementation("io.helidon.dbclient:helidon-dbclient-jdbc")
   implementation("io.helidon.dbclient:helidon-dbclient-hikari")
 
+  runtimeOnly("io.helidon.integrations.db:helidon-integrations-db-pgsql")
   runtimeOnly("org.postgresql:postgresql")
 
   testImplementation("io.helidon.webserver.testing.junit5:helidon-webserver-testing-junit5")
@@ -61,7 +62,7 @@ tasks.jar {
   manifest {
     attributes(
       "Main-Class" to application.mainClass.get(),
-      "Class-Path" to configurations.runtimeClasspath.get().files.map { "libs/${it.name}" }.joinToString { " " },
+      "Class-Path" to configurations.runtimeClasspath.get().files.joinToString(separator = " ") { "libs/${it.name}" },
     )
   }
 }
