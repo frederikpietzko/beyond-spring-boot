@@ -79,7 +79,7 @@ tasks.jar {
   manifest {
     attributes(
       "Main-Class" to application.mainClass.get(),
-      "Class-Path" to configurations.runtimeClasspath.get().files.map { "libs/${it.name}" }.joinToString { " " },
+      "Class-Path" to configurations.runtimeClasspath.get().files.joinToString(" ") { "libs/${it.name}" },
     )
   }
 }
