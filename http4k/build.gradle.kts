@@ -6,6 +6,10 @@ plugins {
 
 val exposedVersion: String by project
 
+kotlin {
+  jvmToolchain(21)
+}
+
 application {
   mainClass.set("com.github.frederikpietzko.ApplicationKt")
 }
@@ -26,7 +30,7 @@ tasks.jar {
   manifest {
     attributes(
       "Main-Class" to application.mainClass.get(),
-      "Class-Path" to configurations.runtimeClasspath.get().files.map { "libs/${it.name}" }.joinToString { " " },
+      "Class-Path" to configurations.runtimeClasspath.get().map { "libs/${it.name}" }.joinToString(" "),
     )
   }
 }
