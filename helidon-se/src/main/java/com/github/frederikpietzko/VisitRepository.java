@@ -8,7 +8,9 @@ import io.helidon.dbclient.DbRow;
 import io.helidon.dbclient.DbTransaction;
 import lombok.RequiredArgsConstructor;
 
-import java.time.ZonedDateTime;
+import java.sql.Timestamp;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -51,7 +53,7 @@ public class VisitRepository {
             .map(row -> row.column("id").asLong().orElseThrow())
             .orElseThrow();
         });
-      return tx.query("insert into visit (id, description, pet_id, datetime) values (nextval('visit_seq'), ?, ?, ?) returning id",
+      return tx.query("insert into visit (id, description, pet_id, date_time) values (nextval('visit_seq'), ?, ?, ?) returning id",
           visit.description(),
           petId,
           visit.dateTime()
@@ -80,7 +82,11 @@ public class VisitRepository {
       row.column("id").asLong().orElseThrow(),
       row.column("description").asString().orElseThrow(),
       mapPet(row),
-      row.column("date_time").as(ZonedDateTime.class).orElseThrow()
+      row.column("date_time")
+        .as(Timestamp.class)
+        .map(Timestamp::toInstant)
+        .map(instant -> OffsetDateTime.ofInstant(instant, ZoneId.systemDefault()))
+        .orElseThrow()
     );
   }
 

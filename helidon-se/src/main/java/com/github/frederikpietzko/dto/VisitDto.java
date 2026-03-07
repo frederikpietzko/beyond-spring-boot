@@ -2,13 +2,13 @@ package com.github.frederikpietzko.dto;
 
 import com.github.frederikpietzko.model.Visit;
 
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 
 public record VisitDto(
   Long id,
   String description,
   PetDto pet,
-  ZonedDateTime dateTime
+  OffsetDateTime dateTime
 ) {
 
   public static VisitDto fromEntity(Visit entity) {
