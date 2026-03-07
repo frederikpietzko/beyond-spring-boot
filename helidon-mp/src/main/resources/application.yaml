@@ -11,6 +11,6 @@ javax:
           password: "${DB_PASSWORD:pg}"
 hibernate:
   hbm2ddl:
-    auto: update
+    auto: validate
 metrics:
   app-name: helidon-mp
