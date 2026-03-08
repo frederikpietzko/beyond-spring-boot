@@ -43,7 +43,9 @@ fun main() {
 
   val objectMapper = ObjectMapper().registerKotlinModule()
     .registerModule(JavaTimeModule())
+  val useVirtualThreads = System.getenv("USE_VIRTUAL_THREADS")?.toBoolean() ?: false
   Javalin.create { config ->
+    config.useVirtualThreads = useVirtualThreads
     config.jsonMapper(JavalinJackson(objectMapper))
     config.router.apiBuilder {
       get("/visits") { ctx ->

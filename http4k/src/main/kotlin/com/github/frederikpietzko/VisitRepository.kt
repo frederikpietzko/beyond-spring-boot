@@ -2,7 +2,10 @@ package com.github.frederikpietzko
 
 import com.github.frederikpietzko.model.Pet
 import com.github.frederikpietzko.model.Visit
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.JoinType
+import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.insertAndGetId
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object VisitRepository {
@@ -17,7 +20,7 @@ object VisitRepository {
     VisitTable
       .join(PetTable, JoinType.INNER)
       .selectAll()
-      .where { PetTable.id eq id }
+      .where { VisitTable.id eq id }
       .map { it.toVisit() }
       .singleOrNull()
   }
