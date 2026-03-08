@@ -5,10 +5,6 @@ ktor:
     modules:
       - com.github.frederikpietzko.AppKt.main
   development: false
-  engine:
-    threads: 16
-    requestQueueLimit: 100
-    shareWorkGroup: false
 db:
   jdbcUrl: "jdbc:postgresql://localhost:6432/postgres"
   username: "pg"
