@@ -41,17 +41,17 @@ spec:
           env:
             - name: JAVA_TOOL_OPTIONS
               value: {{ .Values.jvm.javaToolOptions | quote }}
-            - name: JDBC_URL
+            - name: {{ or .Values.database.urlEnv "JDBC_URL" }}
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.database.secretName }}
                   key: {{ .Values.database.jdbcUrlKey }}
-            - name: DB_USERNAME
+            - name: {{ or .Values.database.usernameEnv "DB_USERNAME"}}
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.database.secretName }}
                   key: {{ .Values.database.usernameKey }}
-            - name: DB_PASSWORD
+            - name: {{ or .Values.database.passwordEnv "DB_PASSWORD" }}
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.database.secretName }}

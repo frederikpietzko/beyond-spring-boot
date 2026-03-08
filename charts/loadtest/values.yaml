@@ -13,7 +13,7 @@ k6-operator:
 # Loadtest definitions
 loadtests:
   get-all-visits:
-    enabled: true
+    enabled: false
     script: "loadtest-get-all-visits.js"
     parallelism: 5
     env:
@@ -29,7 +29,7 @@ loadtests:
       PARALLELISM: "5"
 
   create-visit:
-    enabled: false
+    enabled: true
     script: "loadtest-create-visit.js"
     parallelism: 5
     env:

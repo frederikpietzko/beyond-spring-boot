@@ -1,9 +1,13 @@
 image:
   repository: frederikpietzko/micronaut
-  tag: latest
+  tag: 6d574a9
 
 extraEnv:
   - name: DATASOURCES_DEFAULT_MAXIMUM_POOL_SIZE
     value: "100"
-  - name: MICRONAUT_SERVER_THREAD_SELECTION
-    value: "VIRTUAL"
+#  - name: MICRONAUT_SERVER_NETTY_VIRTUAL_THREADS
+#    value: "true"
+
+jvm:
+  # JAVA_TOOL_OPTIONS is used for JVM settings
+  javaToolOptions: "-Xmx4g -XX:MaxMetaspaceSize=256M -XX:MaxDirectMemorySize=256M --add-opens=java.base/java.lang=ALL-UNNAMED"

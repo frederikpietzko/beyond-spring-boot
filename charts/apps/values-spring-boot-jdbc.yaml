@@ -1,6 +1,6 @@
 image:
   repository: frederikpietzko/spring-boot-jdbc
-  tag: 1fb5b98
+  tag: 6d574a9
 
 extraEnv:
   - name: SPRING_THREADS_VIRTUAL_ENABLED

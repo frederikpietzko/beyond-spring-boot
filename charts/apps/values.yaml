@@ -28,7 +28,7 @@ podSecurityContext: { }
 # fsGroup: 2000
 
 securityContext: { }
-  # capabilities:
+# capabilities:
 #   drop:
 #   - ALL
 # readOnlyRootFilesystem: true
@@ -50,7 +50,6 @@ resources:
 
 jvm:
   # JAVA_TOOL_OPTIONS is used for JVM settings
-  # Default heap 4GB as requested
   javaToolOptions: "-Xmx4g -XX:MaxMetaspaceSize=256M -XX:MaxDirectMemorySize=256M"
 
 database:

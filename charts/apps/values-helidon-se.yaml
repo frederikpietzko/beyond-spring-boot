@@ -1,7 +1,8 @@
 image:
   repository: frederikpietzko/helidon-se
-  tag: latest
+  tag: 1bc47cb
 
-extraEnv:
-  - name: DB_CONNECTION_MAXIMUM_POOL_SIZE
-    value: "100"
+database:
+  urlEnv: DB_CONNECTION_URL
+  usernameEnv: DB_CONNECTION_USERNAME
+  passwordEnv: DB_CONNECTION_PASSWORD

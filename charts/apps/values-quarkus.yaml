@@ -1,6 +1,6 @@
 image:
   repository: frederikpietzko/quarkus
-  tag: latest
+  tag: 6d574a9
 
 extraEnv:
   - name: QUARKUS_DATASOURCE_JDBC_MAX_SIZE

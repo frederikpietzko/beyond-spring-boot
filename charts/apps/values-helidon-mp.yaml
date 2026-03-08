@@ -1,6 +1,6 @@
 image:
   repository: frederikpietzko/helidon-mp
-  tag: latest
+  tag: 27276cb
 
 extraEnv:
   - name: JAVAX_SQL_DATASOURCE_DEFAULT_MAXIMUMPOOLSIZE
