@@ -29,6 +29,7 @@ object DbSettings {
       this.username = username
       this.password = password
       driverClassName = "org.postgresql.Driver"
+      minimumIdle = System.getenv("HIKARI_MIN_IDLE")?.toInt() ?: 10
       maximumPoolSize = System.getenv("HIKARI_MAX_POOL_SIZE")?.toInt() ?: 100
       metricRegistry = prometheusRegistry
     }
