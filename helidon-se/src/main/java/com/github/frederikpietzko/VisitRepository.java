@@ -20,10 +20,22 @@ public class VisitRepository {
   private final DbClient dbClient;
 
   public List<Visit> getVisits() {
-    return dbClient.execute()
-      .query("select * from visit join pet on visit.pet_id = pet.id")
-      .map(this::map)
-      .toList();
+    return transactional((tx) ->
+      tx.query("select * from visit join pet on visit.pet_id = pet.id")
+        .map(this::map)
+        .toList());
+  }
+
+  private <T> T transactional(Function<DbTransaction, T> supplier) {
+    final var transaction = dbClient.transaction();
+    try {
+      final var result = supplier.apply(transaction);
+      transaction.commit();
+      return result;
+    } catch (Throwable t) {
+      transaction.rollback();
+      throw t;
+    }
   }
 
   public Optional<Visit> findVisitById(Long id) {
@@ -39,7 +51,7 @@ public class VisitRepository {
   }
 
   private Visit insert(Visit visit) {
-    return transactional(tx -> {
+    final var ids = transactional(tx -> {
       final var petId = Optional
         .ofNullable(visit.pet().id())
         .orElseGet(() -> {
@@ -53,29 +65,33 @@ public class VisitRepository {
             .map(row -> row.column("id").asLong().orElseThrow())
             .orElseThrow();
         });
-      return tx.query("insert into visit (id, description, pet_id, date_time) values (nextval('visit_seq'), ?, ?, ?) returning id",
+      final var visitId = tx.query("insert into visit (id, description, pet_id, date_time) values (nextval('visit_seq'), ?, ?, ?) returning id",
           visit.description(),
           petId,
           visit.dateTime()
         )
         .findFirst()
-        .map(row -> row.column("id").asLong().orElseThrow());
-    })
-      .flatMap(this::findVisitById)
-      .orElseThrow();
+        .map(row -> row.column("id").asLong().orElseThrow())
+        .orElseThrow();
+      return new IdPair<Long>(visitId, petId);
+    });
+    return new Visit(
+      ids.first(),
+      visit.description(),
+      new Pet(
+        ids.second(),
+        visit.pet().name(),
+        visit.pet().age(),
+        visit.pet().type()
+      ),
+      visit.dateTime()
+    );
+
   }
 
-  private <T> T transactional(Function<DbTransaction, T> supplier) {
-    final var transaction = dbClient.transaction();
-    try {
-      final var result = supplier.apply(transaction);
-      transaction.commit();
-      return result;
-    } catch (Throwable t) {
-      transaction.rollback();
-      throw t;
-    }
+  record IdPair<T>(T first, T second) {
   }
+
 
   private Visit map(DbRow row) {
     return new Visit(
