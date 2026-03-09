@@ -20,10 +20,11 @@ public class VisitRepository {
   private final DbClient dbClient;
 
   public List<Visit> getVisits() {
-    return transactional((tx) ->
-      tx.query("select * from visit join pet on visit.pet_id = pet.id")
-        .map(this::map)
-        .toList());
+    return dbClient
+      .execute()
+      .query("select * from visit join pet on visit.pet_id = pet.id")
+      .map(this::map)
+      .toList();
   }
 
   private <T> T transactional(Function<DbTransaction, T> supplier) {
