@@ -26,16 +26,16 @@ object VisitRepository {
   }
 
   fun save(visit: Visit) = transaction {
-    val petId = visit.pet.id ?: PetTable.insertAndGetId {
-      it[name] = visit.pet.name
-      it[age] = visit.pet.age
-      it[type] = visit.pet.type
+    val petId = visit.pet.id ?: PetTable.insertAndGetId { row ->
+      row[name] = visit.pet.name
+      row[age] = visit.pet.age
+      row[type] = visit.pet.type
     }.value
 
-    val visitId = VisitTable.insertAndGetId {
-      it[description] = visit.description
-      it[pet] = petId
-      it[dateTime] = visit.dateTime
+    val visitId = VisitTable.insertAndGetId { row ->
+      row[description] = visit.description
+      row[pet] = petId
+      row[dateTime] = visit.dateTime
     }.value
 
     visit.copy(id = visitId, pet = visit.pet.copy(id = petId))

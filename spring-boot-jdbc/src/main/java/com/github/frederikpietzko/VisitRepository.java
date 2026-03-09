@@ -12,19 +12,12 @@ import java.util.Optional;
 public interface VisitRepository extends CrudRepository<VisitEntity, Long> {
 
   @Query("""
-    SELECT v.id as visit_id, v.description, v.date_time, v.pet_id, p.name as pet_name, p.age as pet_age, p.type as pet_type
+    SELECT v.id as visit_id, v.description, v.date_time,
+    v.pet_id, p.name as pet_name, p.age as pet_age, p.type as pet_type
     FROM visit v
     JOIN pet p ON v.pet_id = p.id
     """)
   List<VisitProjection> findAllWithPet();
-
-  @Query("""
-    SELECT v.id as visit_id, v.description, v.date_time, v.pet_id, p.name as pet_name, p.age as pet_age, p.type as pet_type
-    FROM visit v
-    JOIN pet p ON v.pet_id = p.id
-    WHERE v.id = :id
-    """)
-  Optional<VisitProjection> findByIdWithPet(Long id);
 
   record VisitProjection(
     Long visit_id,
@@ -36,4 +29,12 @@ public interface VisitRepository extends CrudRepository<VisitEntity, Long> {
     Type pet_type
   ) {
   }
+
+  @Query("""
+    SELECT v.id as visit_id, v.description, v.date_time, v.pet_id, p.name as pet_name, p.age as pet_age, p.type as pet_type
+    FROM visit v
+    JOIN pet p ON v.pet_id = p.id
+    WHERE v.id = :id
+    """)
+  Optional<VisitProjection> findByIdWithPet(Long id);
 }

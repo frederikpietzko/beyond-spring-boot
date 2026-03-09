@@ -29,6 +29,11 @@ import org.http4k.server.Helidon
 import org.http4k.server.asServer
 
 fun main() {
+  val yamlMapper = ObjectMapper(YAMLFactory()).registerKotlinModule()
+  val configStream = Thread.currentThread().contextClassLoader.getResourceAsStream("application.yaml")
+  val appConfig = yamlMapper.readTree(configStream)
+  val dbConfig = appConfig.get("db")
+
   val prometheusRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT).apply {
     config().commonTags("application", "http4k")
     ClassLoaderMetrics().bindTo(this)
@@ -37,11 +42,6 @@ fun main() {
     ProcessorMetrics().bindTo(this)
     JvmThreadMetrics().bindTo(this)
   }
-
-  val yamlMapper = ObjectMapper(YAMLFactory()).registerKotlinModule()
-  val configStream = Thread.currentThread().contextClassLoader.getResourceAsStream("application.yaml")
-  val appConfig = yamlMapper.readTree(configStream)
-  val dbConfig = appConfig.get("db")
 
   DbSettings.init(
     jdbcUrl = System.getenv("JDBC_URL") ?: dbConfig.get("jdbcUrl").asText(),

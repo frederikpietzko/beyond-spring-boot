@@ -20,6 +20,10 @@ import io.micrometer.prometheusmetrics.PrometheusConfig
 import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
 
 fun main() {
+  val yamlMapper = ObjectMapper(YAMLFactory()).registerKotlinModule()
+  val configStream = Thread.currentThread().contextClassLoader.getResourceAsStream("application.yaml")
+  val appConfig = yamlMapper.readTree(configStream)
+
   val prometheusRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT).apply {
     config().commonTags("application", "javalin")
     ClassLoaderMetrics().bindTo(this)
@@ -28,12 +32,7 @@ fun main() {
     ProcessorMetrics().bindTo(this)
     JvmThreadMetrics().bindTo(this)
   }
-
-  val yamlMapper = ObjectMapper(YAMLFactory()).registerKotlinModule()
-  val configStream = Thread.currentThread().contextClassLoader.getResourceAsStream("application.yaml")
-  val appConfig = yamlMapper.readTree(configStream)
   val dbConfig = appConfig.get("db")
-
   DbSettings.init(
     jdbcUrl = System.getenv("JDBC_URL") ?: dbConfig.get("jdbcUrl").asText(),
     username = System.getenv("DB_USERNAME") ?: dbConfig.get("username").asText(),
@@ -44,6 +43,7 @@ fun main() {
   val objectMapper = ObjectMapper().registerKotlinModule()
     .registerModule(JavaTimeModule())
   val useVirtualThreads = System.getenv("USE_VIRTUAL_THREADS")?.toBoolean() ?: false
+
   Javalin.create { config ->
     config.useVirtualThreads = useVirtualThreads
     config.jsonMapper(JavalinJackson(objectMapper))

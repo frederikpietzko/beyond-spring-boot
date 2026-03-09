@@ -1,6 +1,6 @@
 image:
   repository: frederikpietzko/helidon-se
-  tag: 1bc47cb
+  tag: 53667ff
 
 database:
   urlEnv: DB_CONNECTION_URL

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: bombardier-runner
+description: A Helm chart to run bombardier load test scenarios as a Job.
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

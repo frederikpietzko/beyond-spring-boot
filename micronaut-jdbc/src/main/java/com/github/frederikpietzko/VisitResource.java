@@ -25,9 +25,7 @@ public class VisitResource {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public List<VisitDto> getVisits() {
-    return visitRepository
-      .findAllWithPet().stream()
-      .map(VisitRepository.VisitProjection::toDto)
+    return visitRepository.findAllWithPet().stream().map(VisitRepository.VisitProjection::toDto)
       .toList();
   }
 
@@ -35,9 +33,7 @@ public class VisitResource {
   @Path("/{id}")
   @Produces(MediaType.APPLICATION_JSON)
   public VisitDto getVisit(@NotNull @Min(1) Long id) {
-    return visitRepository
-      .findByIdWithPet(id)
-      .map(VisitRepository.VisitProjection::toDto)
+    return visitRepository.findByIdWithPet(id).map(VisitRepository.VisitProjection::toDto)
       .orElseThrow(() -> new NotFoundException("Visit not found"));
   }
 

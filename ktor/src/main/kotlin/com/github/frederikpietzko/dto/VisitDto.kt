@@ -8,7 +8,8 @@ data class VisitDto(
   val id: Long,
   val description: String,
   val pet: PetDto,
-  @Serializable(with = OffsetDateTimeSerializer::class) val dateTime: OffsetDateTime,
+  @Serializable(with = OffsetDateTimeSerializer::class)
+  val dateTime: OffsetDateTime,
 )
 
 fun com.github.frederikpietzko.model.Visit.toDto() = VisitDto(

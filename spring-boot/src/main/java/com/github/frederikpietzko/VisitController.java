@@ -18,20 +18,15 @@ public class VisitController {
   @GetMapping
   public ResponseEntity<List<VisitDto>> getVisits() {
     return ResponseEntity.ok(
-      jpaVisitRepository
-        .findAll()
-        .stream()
-        .map(VisitDto::fromEntity)
-        .toList()
+      jpaVisitRepository.findAll().stream()
+        .map(VisitDto::fromEntity).toList()
     );
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<?> getVisitById(@PathVariable Long id) {
-    return jpaVisitRepository
-      .findById(id)
-      .map(VisitDto::fromEntity)
-      .map(ResponseEntity::ok)
+    return jpaVisitRepository.findById(id)
+      .map(VisitDto::fromEntity).map(ResponseEntity::ok)
       .orElse(ResponseEntity.notFound().build());
   }
 

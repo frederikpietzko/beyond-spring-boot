@@ -31,20 +31,6 @@ public interface VisitRepository extends SqlObject {
      FROM visit v INNER JOIN pet p ON v.pet_id = p.id
     ;""";
 
-  String SELCT_FIND_BY_ID = """
-      select v.id v_id,
-       v.description v_description,
-       v.date_time v_date_time,
-       v.pet_id v_pet_id,
-       p.id p_id,
-       p.name p_name,
-       p.age p_age,
-       p.type p_type
-       FROM visit v INNER JOIN pet p ON v.pet_id = p.id
-       WHERE v.id = :id
-    """;
-
-
   @SqlQuery(SELECT_FIND_ALL)
   @RegisterJoinRowMapper({Visit.class, Pet.class})
   List<JoinRow> findAllRaw();
@@ -59,6 +45,19 @@ public interface VisitRepository extends SqlObject {
         return visit;
       });
   }
+
+  String SELCT_FIND_BY_ID = """
+      select v.id v_id,
+       v.description v_description,
+       v.date_time v_date_time,
+       v.pet_id v_pet_id,
+       p.id p_id,
+       p.name p_name,
+       p.age p_age,
+       p.type p_type
+       FROM visit v INNER JOIN pet p ON v.pet_id = p.id
+       WHERE v.id = :id
+    """;
 
   @SqlQuery(SELCT_FIND_BY_ID)
   @RegisterJoinRowMapper({Visit.class, Pet.class})

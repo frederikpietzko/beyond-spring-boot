@@ -1,0 +1,31 @@
+# Image configuration
+image:
+  repository: frederikpietzko/bombardier-runner
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+# Target URL for the load test
+targetUrl: "http://benchmark-app-apps.apps.svc.cluster.local:8080"
+
+# Resource configuration
+resources:
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+  requests:
+    cpu: 500m
+    memory: 256Mi
+
+# Node selector to run on the loadtest pool
+nodeSelector:
+  pool: loadtest
+
+# Job configuration
+job:
+  backoffLimit: 0
+  restartPolicy: Never
+
+# Common annotations or labels for the pod
+podAnnotations: { }
+podLabels: { }
